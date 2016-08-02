@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class WaniKaniManager {
 
     String BASE_URL = "https://www.wanikani.com/api/user/";
-    String API_KEY = "";
+    String API_KEY = "6984123dc766bdf49edfe44dfa653c6d/";
 
     private WaniKaniService service;
 

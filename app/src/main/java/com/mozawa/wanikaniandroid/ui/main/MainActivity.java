@@ -1,7 +1,6 @@
 package com.mozawa.wanikaniandroid.ui.main;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -10,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mozawa.wanikaniandroid.R;
@@ -17,9 +17,16 @@ import com.mozawa.wanikaniandroid.data.WaniKaniManager;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainMvpView {
 
+    @BindView(R.id.lessonsAvailableTextView)
+    TextView lessonsAvailableTextView;
+    @BindView(R.id.reviewsAvailableTextView)
+    TextView reviewsAvailableTextView;
     private MainPresenter presenter;
 
     @Override
@@ -28,15 +35,17 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
 
         presenter = new MainPresenter(new WaniKaniManager());
         presenter.attachView(this);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        presenter.loadStudyQueue();
+
+        lessonsAvailableTextView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                presenter.loadStudyQueue();
+            public void onClick(View v) {
+
             }
         });
 
@@ -117,6 +126,8 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void showStudyQueue(StudyQueue studyQueue) {
+        lessonsAvailableTextView.setText("Lessons available: " + studyQueue.studyQueueInformation.lessonsAvailable);
+        reviewsAvailableTextView.setText("Reviews available: " + studyQueue.studyQueueInformation.reviewsAvailable);
         Toast.makeText(this, studyQueue.userInformation.username, Toast.LENGTH_SHORT).show();
     }
 }
