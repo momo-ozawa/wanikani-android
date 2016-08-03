@@ -55,7 +55,6 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
                     @Override
                     public void onNext(StudyQueue studyQueue) {
                         getMvpView().showStudyQueue(studyQueue);
-                        Log.d("momo", studyQueue.userInformation.username);
                     }
                 });
     }

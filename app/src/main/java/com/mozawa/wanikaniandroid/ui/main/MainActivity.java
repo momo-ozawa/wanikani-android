@@ -1,5 +1,6 @@
 package com.mozawa.wanikaniandroid.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,12 +10,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mozawa.wanikaniandroid.R;
 import com.mozawa.wanikaniandroid.data.WaniKaniManager;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
+import com.mozawa.wanikaniandroid.ui.ReviewActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 
 import butterknife.BindView;
@@ -23,17 +25,23 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainMvpView {
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     @BindView(R.id.lessonsAvailableTextView)
     TextView lessonsAvailableTextView;
     @BindView(R.id.reviewsAvailableTextView)
     TextView reviewsAvailableTextView;
+    @BindView(R.id.lessonsButton)
+    Button lessonsButton;
+    @BindView(R.id.reviewsButton)
+    Button reviewsButton;
+
     private MainPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
 
@@ -42,10 +50,13 @@ public class MainActivity extends BaseActivity
 
         presenter.loadStudyQueue();
 
-        lessonsAvailableTextView.setOnClickListener(new View.OnClickListener() {
+        reviewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String urlString = "https://www.wanikani.com/review/session";
+                Intent intent = new Intent(MainActivity.this, ReviewActivity.class);
+                intent.putExtra("URL", urlString);
+                startActivity(intent);
             }
         });
 
@@ -126,8 +137,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void showStudyQueue(StudyQueue studyQueue) {
-        lessonsAvailableTextView.setText("Lessons available: " + studyQueue.studyQueueInformation.lessonsAvailable);
-        reviewsAvailableTextView.setText("Reviews available: " + studyQueue.studyQueueInformation.reviewsAvailable);
-        Toast.makeText(this, studyQueue.userInformation.username, Toast.LENGTH_SHORT).show();
+        lessonsAvailableTextView.setText(studyQueue.studyQueueInformation.lessonsAvailable + " Lessons");
+        reviewsAvailableTextView.setText(studyQueue.studyQueueInformation.reviewsAvailable + " Reviews");
     }
 }
