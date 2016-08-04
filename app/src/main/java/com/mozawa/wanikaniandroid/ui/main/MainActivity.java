@@ -7,6 +7,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,8 @@ import com.mozawa.wanikaniandroid.data.WaniKaniManager;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
 import com.mozawa.wanikaniandroid.ui.ReviewActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
+import com.mozawa.wanikaniandroid.ui.util.CircleTextView;
+import com.mozawa.wanikaniandroid.ui.util.TimeUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,14 +30,21 @@ public class MainActivity extends BaseActivity
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.lessonsAvailableTextView)
-    TextView lessonsAvailableTextView;
-    @BindView(R.id.reviewsAvailableTextView)
-    TextView reviewsAvailableTextView;
+    @BindView(R.id.lessonsCircleTextView)
+    CircleTextView lessonsCircleTextView;
     @BindView(R.id.lessonsButton)
     Button lessonsButton;
+    @BindView(R.id.reviewsCircleTextView)
+    CircleTextView reviewsCircleTextView;
     @BindView(R.id.reviewsButton)
     Button reviewsButton;
+    @BindView(R.id.reviewDateTextView)
+    TextView reviewDateTextView;
+    @BindView(R.id.nextHourCircleTextView)
+    CircleTextView nextHourCircleTextView;
+    @BindView(R.id.nextDayCircleTextView)
+    CircleTextView nextDayCircleTextView;
+
 
     private MainPresenter presenter;
 
@@ -68,6 +78,13 @@ public class MainActivity extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.loadStudyQueue();
+        Log.d("momo", "in on Resume");
     }
 
     @Override
@@ -136,8 +153,16 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
-    public void showStudyQueue(StudyQueue studyQueue) {
-        lessonsAvailableTextView.setText(studyQueue.studyQueueInformation.lessonsAvailable + " Lessons");
-        reviewsAvailableTextView.setText(studyQueue.studyQueueInformation.reviewsAvailable + " Reviews");
+    public void showAvailableStudyQueue(StudyQueue studyQueue) {
+        lessonsCircleTextView.setText(studyQueue.studyQueueInformation.lessonsAvailable + "");
+        reviewsCircleTextView.setText(studyQueue.studyQueueInformation.reviewsAvailable + "");
+    }
+
+    @Override
+    public void showReviewStudyQueue(StudyQueue studyQueue) {
+        long nextReviewDate = studyQueue.studyQueueInformation.nextReviewDate;
+        reviewDateTextView.setText("Reviews available " + TimeUtil.getTimeUntil(nextReviewDate));
+        nextHourCircleTextView.setText(studyQueue.studyQueueInformation.reviewsAvailableNextHour + "");
+        nextDayCircleTextView.setText(studyQueue.studyQueueInformation.reviewsAvailableNextDay + "");
     }
 }

@@ -5,6 +5,7 @@ import com.mozawa.wanikaniandroid.ui.base.MvpView;
 
 public interface MainMvpView extends MvpView {
 
-    void showStudyQueue(StudyQueue studyQueue);
+    void showAvailableStudyQueue(StudyQueue studyQueue);
+    void showReviewStudyQueue(StudyQueue studyQueue);
 
 }

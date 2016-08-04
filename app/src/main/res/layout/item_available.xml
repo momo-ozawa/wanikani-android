@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<RelativeLayout
     android:id="@+id/content_main"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_margin="16dp">
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:layout_margin="16dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
                 android:text="Available"
                 android:textColor="@android:color/black"
                 android:textSize="20dp"
@@ -31,54 +30,51 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
 
-                <TextView
-                    android:id="@+id/lessonsAvailableTextView"
+                <com.mozawa.wanikaniandroid.ui.util.CircleTextView
+                    android:id="@+id/lessonsCircleTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:padding="8dp"
-                    android:text="0 Lessons"
-                    android:textSize="16dp"
+                    app:labelText="Lessons"
                     />
 
                 <Button
                     android:id="@+id/lessonsButton"
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:text="Start Session"
+                    style="@style/FlatButtonText"
                     />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp">
 
-                <TextView
-                    android:id="@+id/reviewsAvailableTextView"
+                <com.mozawa.wanikaniandroid.ui.util.CircleTextView
+                    android:id="@+id/reviewsCircleTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:padding="8dp"
-                    android:text="0 Reviews"
-                    android:textSize="16sp"
+                    app:labelText="Reviews"
                     />
 
                 <Button
                     android:id="@+id/reviewsButton"
-                    android:layout_width="140dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:text="Start Session"
+                    style="@style/FlatButtonText"
                     />
-
 
             </RelativeLayout>
 
@@ -86,4 +82,4 @@
 
     </android.support.v7.widget.CardView>
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

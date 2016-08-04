@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/circleLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+
+        <ImageView
+            android:id="@+id/circleImageView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/circle_bg_no_items"
+            />
+
+        <TextView
+            android:id="@+id/circleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="0"
+            android:textColor="@android:color/white"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/labelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/circleLayout"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:textSize="16sp"
+        />
+
+</RelativeLayout>
