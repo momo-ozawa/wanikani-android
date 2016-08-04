@@ -30,6 +30,8 @@
 
                 <include layout="@layout/item_review"/>
 
+                <include layout="@layout/item_critical"/>
+
             </LinearLayout>
 
         </ScrollView>

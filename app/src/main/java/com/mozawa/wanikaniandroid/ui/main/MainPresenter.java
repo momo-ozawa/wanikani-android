@@ -4,9 +4,11 @@ import android.util.Log;
 
 import com.mozawa.wanikaniandroid.data.WaniKaniManager;
 import com.mozawa.wanikaniandroid.data.WaniKaniService;
+import com.mozawa.wanikaniandroid.data.model.CriticalItems;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
 import com.mozawa.wanikaniandroid.ui.base.BasePresenter;
 
+import rx.Observer;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -14,8 +16,11 @@ import rx.schedulers.Schedulers;
 
 public class MainPresenter extends BasePresenter<MainMvpView> {
 
+    public String TAG = MainPresenter.class.getSimpleName();
+
     private WaniKaniManager waniKaniManager;
-    private Subscription subscription;
+    private Subscription studyQueueSubscription;
+    private Subscription criticalItemsSubscription;
 
     public MainPresenter(WaniKaniManager waniKaniManager) {
         this.waniKaniManager = waniKaniManager;
@@ -28,9 +33,15 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
 
     @Override
     public void detachView() {
-        if (subscription != null) {
-            subscription.unsubscribe();
+
+        if (studyQueueSubscription != null) {
+            studyQueueSubscription.unsubscribe();
         }
+
+        if (criticalItemsSubscription != null) {
+            criticalItemsSubscription.unsubscribe();
+        }
+
         super.detachView();
     }
 
@@ -38,7 +49,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
         checkViewAttached();
 
         WaniKaniService service = waniKaniManager.getService();
-        subscription = service.getStudyQueue()
+        studyQueueSubscription = service.getStudyQueue()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<StudyQueue>() {
@@ -49,13 +60,38 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("momo", e.getLocalizedMessage());
+                        Log.d(TAG, e.getLocalizedMessage());
                     }
 
                     @Override
                     public void onNext(StudyQueue studyQueue) {
                         getMvpView().showAvailableStudyQueue(studyQueue);
                         getMvpView().showReviewStudyQueue(studyQueue);
+                    }
+                });
+    }
+
+    public void loadCriticalItems() {
+        checkViewAttached();
+
+        WaniKaniService service = waniKaniManager.getService();
+        criticalItemsSubscription = service.getCriticalItems()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<CriticalItems>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(TAG, e.getLocalizedMessage());
+                    }
+
+                    @Override
+                    public void onNext(CriticalItems criticalItems) {
+                        getMvpView().showCriticalItems(criticalItems);
                     }
                 });
     }

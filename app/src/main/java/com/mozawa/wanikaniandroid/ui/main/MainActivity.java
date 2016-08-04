@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.mozawa.wanikaniandroid.R;
 import com.mozawa.wanikaniandroid.data.WaniKaniManager;
+import com.mozawa.wanikaniandroid.data.model.CriticalItems;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
 import com.mozawa.wanikaniandroid.ui.ReviewActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
@@ -44,6 +45,8 @@ public class MainActivity extends BaseActivity
     CircleTextView nextHourCircleTextView;
     @BindView(R.id.nextDayCircleTextView)
     CircleTextView nextDayCircleTextView;
+    @BindView(R.id.criticalItemTextView)
+    TextView criticalItemTextView;
 
 
     private MainPresenter presenter;
@@ -59,6 +62,7 @@ public class MainActivity extends BaseActivity
         presenter.attachView(this);
 
         presenter.loadStudyQueue();
+        presenter.loadCriticalItems();
 
         reviewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,5 +168,11 @@ public class MainActivity extends BaseActivity
         reviewDateTextView.setText("Reviews available " + TimeUtil.getTimeUntil(nextReviewDate));
         nextHourCircleTextView.setText(studyQueue.studyQueueInformation.reviewsAvailableNextHour + "");
         nextDayCircleTextView.setText(studyQueue.studyQueueInformation.reviewsAvailableNextDay + "");
+    }
+
+    @Override
+    public void showCriticalItems(CriticalItems criticalItems) {
+        CriticalItems.CriticalItemsInformation firstItem = criticalItems.criticalItemsInformationList.get(0);
+        criticalItemTextView.setText(firstItem.character + " " + firstItem.meaning);
     }
 }
