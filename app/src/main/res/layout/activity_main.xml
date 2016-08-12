@@ -26,11 +26,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <include layout="@layout/item_available_now"/>
+                <include layout="@layout/card_available_now"/>
 
-                <include layout="@layout/item_coming_up"/>
+                <include layout="@layout/card_coming_up"/>
 
-                <include layout="@layout/item_critical"/>
+                <include layout="@layout/card_critical"/>
 
             </LinearLayout>
 
