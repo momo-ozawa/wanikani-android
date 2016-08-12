@@ -5,6 +5,8 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -28,8 +30,11 @@ import butterknife.ButterKnife;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainMvpView {
 
+    // Toolbar
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    // Available Now
     @BindView(R.id.lessonsCircleTextView)
     CircleTextView lessonsCircleTextView;
     @BindView(R.id.lessonsButton)
@@ -38,17 +43,21 @@ public class MainActivity extends BaseActivity
     CircleTextView reviewsCircleTextView;
     @BindView(R.id.reviewsButton)
     Button reviewsButton;
+
+    // Coming Up
     @BindView(R.id.reviewDateTextView)
     TextView reviewDateTextView;
     @BindView(R.id.nextHourCircleTextView)
     CircleTextView nextHourCircleTextView;
     @BindView(R.id.nextDayCircleTextView)
     CircleTextView nextDayCircleTextView;
-    @BindView(R.id.criticalItemTextView)
-    TextView criticalItemTextView;
 
+    // Critical Items
+    @BindView(R.id.criticalItemsRecyclerView)
+    RecyclerView criticalItemsRecyclerView;
 
     private MainPresenter presenter;
+    private CriticalItemsAdapter criticalItemsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,7 +190,14 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void showCriticalItems(CriticalItems criticalItems) {
-        CriticalItems.CriticalItemInformation firstItem = criticalItems.criticalItemsInformationList.get(0);
-        criticalItemTextView.setText(firstItem.character + " " + firstItem.meaning);
+//        CriticalItems.CriticalItemInformation firstItem = criticalItems.criticalItemsInformationList.get(0);
+//        criticalItemTextView.setText(firstItem.character + " " + firstItem.meaning);
+
+        criticalItemsAdapter = new CriticalItemsAdapter();
+        criticalItemsAdapter.setCriticalItemInformationList(criticalItems.criticalItemsInformationList);
+
+        criticalItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        criticalItemsRecyclerView.setAdapter(criticalItemsAdapter);
+        criticalItemsAdapter.notifyDataSetChanged();
     }
 }
