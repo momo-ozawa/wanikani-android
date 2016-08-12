@@ -21,9 +21,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ReviewActivity"
-            android:label="@string/title_activity_review"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.WebViewActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".ui.main.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.main.MainActivity"/>
         </activity>
     </application>
 

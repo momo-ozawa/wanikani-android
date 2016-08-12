@@ -36,9 +36,9 @@ public class CriticalItems {
     @SerializedName("user_information")
     public UserInformation userInformation;
     @SerializedName("requested_information")
-    public List<CriticalItemsInformation> criticalItemsInformationList;
+    public List<CriticalItemInformation> criticalItemsInformationList;
 
-    public static class CriticalItemsInformation {
+    public static class CriticalItemInformation {
 
         public String type;
         public String character;

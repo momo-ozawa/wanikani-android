@@ -1,6 +1,5 @@
 package com.mozawa.wanikaniandroid.ui.main;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,7 +17,7 @@ import com.mozawa.wanikaniandroid.R;
 import com.mozawa.wanikaniandroid.data.WaniKaniManager;
 import com.mozawa.wanikaniandroid.data.model.CriticalItems;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
-import com.mozawa.wanikaniandroid.ui.ReviewActivity;
+import com.mozawa.wanikaniandroid.ui.WebViewActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.util.CircleTextView;
 import com.mozawa.wanikaniandroid.ui.util.TimeUtil;
@@ -58,19 +57,29 @@ public class MainActivity extends BaseActivity
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
 
+        toolbar.setTitle("Dashboard");
+
         presenter = new MainPresenter(new WaniKaniManager());
         presenter.attachView(this);
 
         presenter.loadStudyQueue();
         presenter.loadCriticalItems();
 
+        lessonsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String toolbarTitle = "Lessons";
+                String url = "https://www.wanikani.com/lesson/session";
+                startActivity(WebViewActivity.getStartIntent(MainActivity.this, toolbarTitle, url));
+            }
+        });
+
         reviewsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String urlString = "https://www.wanikani.com/review/session";
-                Intent intent = new Intent(MainActivity.this, ReviewActivity.class);
-                intent.putExtra("URL", urlString);
-                startActivity(intent);
+                String toolbarTitle = "Reviews";
+                String url = "https://www.wanikani.com/review/session";
+                startActivity(WebViewActivity.getStartIntent(MainActivity.this, toolbarTitle, url));
             }
         });
 
@@ -172,7 +181,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void showCriticalItems(CriticalItems criticalItems) {
-        CriticalItems.CriticalItemsInformation firstItem = criticalItems.criticalItemsInformationList.get(0);
+        CriticalItems.CriticalItemInformation firstItem = criticalItems.criticalItemsInformationList.get(0);
         criticalItemTextView.setText(firstItem.character + " " + firstItem.meaning);
     }
 }

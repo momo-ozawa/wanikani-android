@@ -19,7 +19,7 @@ public class TimeUtil {
         }
 
         long now = System.currentTimeMillis();
-        if (time < now || time <= 0) {
+        if (time <= 0) {
             return null;
         }
 

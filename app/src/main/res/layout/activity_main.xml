@@ -26,9 +26,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <include layout="@layout/item_available"/>
+                <include layout="@layout/item_available_now"/>
 
-                <include layout="@layout/item_review"/>
+                <include layout="@layout/item_coming_up"/>
 
                 <include layout="@layout/item_critical"/>
 
