@@ -1,5 +1,6 @@
 package com.mozawa.wanikaniandroid.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -8,7 +9,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +21,8 @@ import com.mozawa.wanikaniandroid.data.model.CriticalItems;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
 import com.mozawa.wanikaniandroid.ui.WebViewActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
+import com.mozawa.wanikaniandroid.ui.radicals.RadicalsActivity;
+import com.mozawa.wanikaniandroid.ui.radicals.RadicalsAdapter;
 import com.mozawa.wanikaniandroid.ui.util.CircleTextView;
 import com.mozawa.wanikaniandroid.ui.util.TimeUtil;
 
@@ -58,6 +60,7 @@ public class MainActivity extends BaseActivity
 
     private MainPresenter presenter;
     private CriticalItemsAdapter criticalItemsAdapter;
+    private RadicalsAdapter radicalsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +109,6 @@ public class MainActivity extends BaseActivity
     protected void onResume() {
         super.onResume();
         presenter.loadStudyQueue();
-        Log.d("momo", "in on Resume");
     }
 
     @Override
@@ -155,17 +157,18 @@ public class MainActivity extends BaseActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        switch (id) {
 
-        } else if (id == R.id.nav_slideshow) {
+            case R.id.nav_radicals:
+                Intent intent = new Intent(MainActivity.this, RadicalsActivity.class);
+                startActivity(intent);
+                break;
 
-        } else if (id == R.id.nav_manage) {
+            case R.id.nav_kanji:
+                break;
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+            case R.id.nav_vocabularly:
+                break;
 
         }
 

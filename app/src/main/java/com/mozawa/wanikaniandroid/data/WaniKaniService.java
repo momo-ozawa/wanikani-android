@@ -1,6 +1,7 @@
 package com.mozawa.wanikaniandroid.data;
 
 import com.mozawa.wanikaniandroid.data.model.CriticalItems;
+import com.mozawa.wanikaniandroid.data.model.Radicals;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
 
 import retrofit2.http.GET;
@@ -13,4 +14,7 @@ public interface WaniKaniService {
 
     @GET("critical-items")
     Observable<CriticalItems> getCriticalItems();
+
+    @GET("radicals")
+    Observable<Radicals> getRadicals();
 }

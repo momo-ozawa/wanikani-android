@@ -21,6 +21,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     private WaniKaniManager waniKaniManager;
     private Subscription studyQueueSubscription;
     private Subscription criticalItemsSubscription;
+    private Subscription  radicalsSubscription;
 
     public MainPresenter(WaniKaniManager waniKaniManager) {
         this.waniKaniManager = waniKaniManager;
@@ -40,6 +41,10 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
 
         if (criticalItemsSubscription != null) {
             criticalItemsSubscription.unsubscribe();
+        }
+
+        if (radicalsSubscription != null) {
+            radicalsSubscription.unsubscribe();
         }
 
         super.detachView();
