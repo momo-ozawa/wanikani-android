@@ -6,35 +6,37 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import com.mozawa.wanikaniandroid.R;
-import com.mozawa.wanikaniandroid.data.WaniKaniManager;
 import com.mozawa.wanikaniandroid.data.model.Radicals;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RadicalsActivity extends BaseActivity implements RadicalsMvpView{
+public class RadicalsActivity extends BaseActivity implements RadicalsMvpView {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.radicalsRecyclerView)
     RecyclerView radicalsRecyclerView;
 
-    private RadicalsPresenter presenter;
+    @Inject
+    RadicalsPresenter presenter;
+
     private RadicalsAdapter radicalsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivityComponent().inject(this);
         setContentView(R.layout.activity_radicals);
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        presenter = new RadicalsPresenter(new WaniKaniManager());
         presenter.attachView(this);
-
         presenter.loadRadicals();
     }
 

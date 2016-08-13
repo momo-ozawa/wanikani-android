@@ -2,11 +2,12 @@ package com.mozawa.wanikaniandroid.ui.main;
 
 import android.util.Log;
 
-import com.mozawa.wanikaniandroid.data.WaniKaniManager;
-import com.mozawa.wanikaniandroid.data.WaniKaniService;
+import com.mozawa.wanikaniandroid.data.DataManager;
 import com.mozawa.wanikaniandroid.data.model.CriticalItems;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
 import com.mozawa.wanikaniandroid.ui.base.BasePresenter;
+
+import javax.inject.Inject;
 
 import rx.Observer;
 import rx.Subscriber;
@@ -18,13 +19,13 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
 
     public String TAG = MainPresenter.class.getSimpleName();
 
-    private WaniKaniManager waniKaniManager;
+    private DataManager dataManager;
     private Subscription studyQueueSubscription;
     private Subscription criticalItemsSubscription;
-    private Subscription  radicalsSubscription;
 
-    public MainPresenter(WaniKaniManager waniKaniManager) {
-        this.waniKaniManager = waniKaniManager;
+    @Inject
+    public MainPresenter(DataManager dataManager) {
+        this.dataManager = dataManager;
     }
 
     @Override
@@ -43,18 +44,13 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
             criticalItemsSubscription.unsubscribe();
         }
 
-        if (radicalsSubscription != null) {
-            radicalsSubscription.unsubscribe();
-        }
-
         super.detachView();
     }
 
     public void loadStudyQueue() {
         checkViewAttached();
 
-        WaniKaniService service = waniKaniManager.getService();
-        studyQueueSubscription = service.getStudyQueue()
+        studyQueueSubscription = dataManager.getStudyQueue()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<StudyQueue>() {
@@ -79,8 +75,7 @@ public class MainPresenter extends BasePresenter<MainMvpView> {
     public void loadCriticalItems() {
         checkViewAttached();
 
-        WaniKaniService service = waniKaniManager.getService();
-        criticalItemsSubscription = service.getCriticalItems()
+        criticalItemsSubscription = dataManager.getCriticalItems()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<CriticalItems>() {

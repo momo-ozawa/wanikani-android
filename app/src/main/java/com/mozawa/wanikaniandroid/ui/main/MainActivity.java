@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.mozawa.wanikaniandroid.R;
-import com.mozawa.wanikaniandroid.data.WaniKaniManager;
 import com.mozawa.wanikaniandroid.data.model.CriticalItems;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
 import com.mozawa.wanikaniandroid.ui.WebViewActivity;
@@ -25,6 +24,8 @@ import com.mozawa.wanikaniandroid.ui.radicals.RadicalsActivity;
 import com.mozawa.wanikaniandroid.ui.radicals.RadicalsAdapter;
 import com.mozawa.wanikaniandroid.ui.util.CircleTextView;
 import com.mozawa.wanikaniandroid.ui.util.TimeUtil;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -58,22 +59,23 @@ public class MainActivity extends BaseActivity
     @BindView(R.id.criticalItemsRecyclerView)
     RecyclerView criticalItemsRecyclerView;
 
-    private MainPresenter presenter;
+    @Inject
+    MainPresenter presenter;
+
     private CriticalItemsAdapter criticalItemsAdapter;
     private RadicalsAdapter radicalsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActivityComponent().inject(this);
         setContentView(R.layout.activity_main);
-        setSupportActionBar(toolbar);
         ButterKnife.bind(this);
 
+        setSupportActionBar(toolbar);
         toolbar.setTitle("Dashboard");
 
-        presenter = new MainPresenter(new WaniKaniManager());
         presenter.attachView(this);
-
         presenter.loadStudyQueue();
         presenter.loadCriticalItems();
 

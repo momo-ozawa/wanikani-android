@@ -3,10 +3,11 @@ package com.mozawa.wanikaniandroid.ui.radicals;
 
 import android.util.Log;
 
-import com.mozawa.wanikaniandroid.data.WaniKaniManager;
-import com.mozawa.wanikaniandroid.data.WaniKaniService;
+import com.mozawa.wanikaniandroid.data.DataManager;
 import com.mozawa.wanikaniandroid.data.model.Radicals;
 import com.mozawa.wanikaniandroid.ui.base.BasePresenter;
+
+import javax.inject.Inject;
 
 import rx.Subscriber;
 import rx.Subscription;
@@ -17,11 +18,12 @@ public class RadicalsPresenter extends BasePresenter<RadicalsMvpView> {
 
     public String TAG = RadicalsPresenter.class.getSimpleName();
 
-    private WaniKaniManager waniKaniManager;
+    private DataManager dataManager;
     private Subscription radicalsSubscription;
 
-    public RadicalsPresenter(WaniKaniManager waniKaniManager) {
-        this.waniKaniManager = waniKaniManager;
+    @Inject
+    public RadicalsPresenter(DataManager dataManager) {
+        this.dataManager = dataManager;
     }
 
     @Override
@@ -42,8 +44,7 @@ public class RadicalsPresenter extends BasePresenter<RadicalsMvpView> {
     public void loadRadicals() {
         checkViewAttached();
 
-        WaniKaniService service = waniKaniManager.getService();
-        radicalsSubscription = service.getRadicals()
+        radicalsSubscription = dataManager.getRadicals()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<Radicals>() {
