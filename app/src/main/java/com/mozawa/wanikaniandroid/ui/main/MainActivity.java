@@ -190,9 +190,6 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void showCriticalItems(CriticalItems criticalItems) {
-//        CriticalItems.CriticalItemInformation firstItem = criticalItems.criticalItemsInformationList.get(0);
-//        criticalItemTextView.setText(firstItem.character + " " + firstItem.meaning);
-
         criticalItemsAdapter = new CriticalItemsAdapter();
         criticalItemsAdapter.setCriticalItemInformationList(criticalItems.criticalItemsInformationList);
 

@@ -36,9 +36,9 @@ public class CriticalItemsAdapter extends RecyclerView.Adapter<CriticalItemsAdap
 
     @Override
     public void onBindViewHolder(CriticalItemsViewHolder holder, int position) {
-        CriticalItems.CriticalItemInformation criticalItemInformation = criticalItemInformationList.get(position);
-        holder.characterTextView.setText(criticalItemInformation.getCharacter());
-        holder.percentageTextView.setText(criticalItemInformation.percentage);
+        CriticalItems.CriticalItemInformation criticalItem = criticalItemInformationList.get(position);
+        holder.characterTextView.setText(criticalItem.getCharacter() + " " + criticalItem.meaning);
+        holder.percentageTextView.setText(criticalItem.percentage);
     }
 
     @Override
