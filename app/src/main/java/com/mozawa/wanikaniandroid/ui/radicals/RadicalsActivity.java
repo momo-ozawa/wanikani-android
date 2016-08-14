@@ -16,15 +16,16 @@ import butterknife.ButterKnife;
 
 public class RadicalsActivity extends BaseActivity implements RadicalsMvpView {
 
+    @Inject
+    RadicalsPresenter presenter;
+
+    @Inject
+    RadicalsAdapter radicalsAdapter;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.radicalsRecyclerView)
     RecyclerView radicalsRecyclerView;
-
-    @Inject
-    RadicalsPresenter presenter;
-
-    private RadicalsAdapter radicalsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +51,10 @@ public class RadicalsActivity extends BaseActivity implements RadicalsMvpView {
 
     @Override
     public void showRadicals(Radicals radicals) {
-
-        radicalsAdapter = new RadicalsAdapter();
-        radicalsAdapter.setRadicalInformationList(radicals.radicalInformationList);
-
         radicalsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         radicalsRecyclerView.setAdapter(radicalsAdapter);
+
+        radicalsAdapter.setRadicalInformationList(radicals.radicalInformationList);
         radicalsAdapter.notifyDataSetChanged();
     }
 }

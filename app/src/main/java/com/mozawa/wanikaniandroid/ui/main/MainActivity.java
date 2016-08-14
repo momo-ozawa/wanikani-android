@@ -21,7 +21,6 @@ import com.mozawa.wanikaniandroid.data.model.StudyQueue;
 import com.mozawa.wanikaniandroid.ui.WebViewActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.radicals.RadicalsActivity;
-import com.mozawa.wanikaniandroid.ui.radicals.RadicalsAdapter;
 import com.mozawa.wanikaniandroid.ui.util.CircleTextView;
 import com.mozawa.wanikaniandroid.ui.util.TimeUtil;
 
@@ -32,6 +31,12 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, MainMvpView {
+
+    @Inject
+    MainPresenter presenter;
+
+    @Inject
+    CriticalItemsAdapter criticalItemsAdapter;
 
     // Toolbar
     @BindView(R.id.toolbar)
@@ -58,12 +63,6 @@ public class MainActivity extends BaseActivity
     // Critical Items
     @BindView(R.id.criticalItemsRecyclerView)
     RecyclerView criticalItemsRecyclerView;
-
-    @Inject
-    MainPresenter presenter;
-
-    private CriticalItemsAdapter criticalItemsAdapter;
-    private RadicalsAdapter radicalsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,11 +194,10 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void showCriticalItems(CriticalItems criticalItems) {
-        criticalItemsAdapter = new CriticalItemsAdapter();
-        criticalItemsAdapter.setCriticalItemInformationList(criticalItems.criticalItemsInformationList);
-
         criticalItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         criticalItemsRecyclerView.setAdapter(criticalItemsAdapter);
+
+        criticalItemsAdapter.setCriticalItemInformationList(criticalItems.criticalItemsInformationList);
         criticalItemsAdapter.notifyDataSetChanged();
     }
 }

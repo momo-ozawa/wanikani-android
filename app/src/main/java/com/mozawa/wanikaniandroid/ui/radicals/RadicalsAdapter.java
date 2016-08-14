@@ -13,10 +13,13 @@ import com.mozawa.wanikaniandroid.data.model.Radicals;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class RadicalsAdapter extends RecyclerView.Adapter<RadicalsAdapter.RadicalsViewHolder> {
 
     private List<Radicals.RadicalInformation> radicalInformationList;
 
+    @Inject
     public RadicalsAdapter() {
         radicalInformationList = new ArrayList<>();
     }

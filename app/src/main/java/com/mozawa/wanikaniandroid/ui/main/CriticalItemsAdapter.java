@@ -12,6 +12,8 @@ import com.mozawa.wanikaniandroid.data.model.CriticalItems;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -19,6 +21,7 @@ public class CriticalItemsAdapter extends RecyclerView.Adapter<CriticalItemsAdap
 
     private List<CriticalItems.CriticalItemInformation> criticalItemInformationList;
 
+    @Inject
     public CriticalItemsAdapter() {
         criticalItemInformationList = new ArrayList<>();
     }
