@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import com.mozawa.wanikaniandroid.R;
 import com.mozawa.wanikaniandroid.data.model.Radicals;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
+import com.mozawa.wanikaniandroid.ui.util.DividerItemDecoration;
 
 import javax.inject.Inject;
 
@@ -53,6 +54,7 @@ public class RadicalsActivity extends BaseActivity implements RadicalsMvpView {
     public void showRadicals(Radicals radicals) {
         radicalsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         radicalsRecyclerView.setAdapter(radicalsAdapter);
+        radicalsRecyclerView.addItemDecoration(new DividerItemDecoration(this));
 
         radicalsAdapter.setRadicalInformationList(radicals.radicalInformationList);
         radicalsAdapter.notifyDataSetChanged();
