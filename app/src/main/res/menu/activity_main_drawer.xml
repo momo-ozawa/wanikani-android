@@ -2,31 +2,51 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Dashboard"
+            />
+
         <item
             android:id="@+id/nav_radicals"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Radicals"/>
+            android:title="Radicals"
+            />
+
         <item
             android:id="@+id/nav_kanji"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Kanji"/>
+            android:title="Kanji"
+            />
+
         <item
             android:id="@+id/nav_vocabularly"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Vocabulary"/>
+            android:title="Vocabulary"
+            />
+
     </group>
 
     <item android:title="Communicate">
+
         <menu>
+
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share"/>
+                android:title="Share"
+                />
+
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send"/>
+                android:title="Send"
+                />
+
         </menu>
+
     </item>
 
 </menu>

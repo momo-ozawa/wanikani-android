@@ -1,0 +1,20 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/card_available_now"/>
+
+        <include layout="@layout/card_coming_up"/>
+
+        <include layout="@layout/card_critical"/>
+
+    </LinearLayout>
+
+</ScrollView>

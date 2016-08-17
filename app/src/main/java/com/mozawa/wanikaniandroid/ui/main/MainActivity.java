@@ -1,68 +1,37 @@
 package com.mozawa.wanikaniandroid.ui.main;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.FrameLayout;
 
 import com.mozawa.wanikaniandroid.R;
-import com.mozawa.wanikaniandroid.data.model.CriticalItems;
-import com.mozawa.wanikaniandroid.data.model.StudyQueue;
-import com.mozawa.wanikaniandroid.ui.WebViewActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
-import com.mozawa.wanikaniandroid.ui.radicals.RadicalsActivity;
-import com.mozawa.wanikaniandroid.ui.util.CircleTextView;
-import com.mozawa.wanikaniandroid.ui.util.TimeUtil;
-
-import javax.inject.Inject;
+import com.mozawa.wanikaniandroid.ui.dashboard.DashboardFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener, MainMvpView {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
-    @Inject
-    MainPresenter presenter;
-
-    @Inject
-    CriticalItemsAdapter criticalItemsAdapter;
-
-    // Toolbar
+    // Navigation
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.navigationView)
+    NavigationView navigationView;
+    @BindView(R.id.drawerLayout)
+    DrawerLayout drawerLayout;
 
-    // Available Now
-    @BindView(R.id.lessonsCircleTextView)
-    CircleTextView lessonsCircleTextView;
-    @BindView(R.id.lessonsButton)
-    Button lessonsButton;
-    @BindView(R.id.reviewsCircleTextView)
-    CircleTextView reviewsCircleTextView;
-    @BindView(R.id.reviewsButton)
-    Button reviewsButton;
-
-    // Coming Up
-    @BindView(R.id.reviewDateTextView)
-    TextView reviewDateTextView;
-    @BindView(R.id.nextHourCircleTextView)
-    CircleTextView nextHourCircleTextView;
-    @BindView(R.id.nextDayCircleTextView)
-    CircleTextView nextDayCircleTextView;
-
-    // Critical Items
-    @BindView(R.id.criticalItemsRecyclerView)
-    RecyclerView criticalItemsRecyclerView;
+    @BindView(R.id.frameLayout)
+    FrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,59 +41,20 @@ public class MainActivity extends BaseActivity
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Dashboard");
+        getSupportActionBar().setTitle(R.string.title_activity_main);
 
-        presenter.attachView(this);
-        presenter.loadStudyQueue();
-        presenter.loadCriticalItems();
+        setUpActionBarDrawerToggle();
 
-        lessonsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String toolbarTitle = "Lessons";
-                String url = "https://www.wanikani.com/lesson/session";
-                startActivity(WebViewActivity.getStartIntent(MainActivity.this, toolbarTitle, url));
-            }
-        });
-
-        reviewsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String toolbarTitle = "Reviews";
-                String url = "https://www.wanikani.com/review/session";
-                startActivity(WebViewActivity.getStartIntent(MainActivity.this, toolbarTitle, url));
-            }
-        });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.loadStudyQueue();
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (presenter != null) {
-            presenter.detachView();
-        }
-        super.onDestroy();
+        // Show dashboard fragment as default
+        displayFragment(R.id.nav_dashboard);
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -155,14 +85,23 @@ public class MainActivity extends BaseActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        displayFragment(item.getItemId());
+        return true;
+    }
 
-        switch (id) {
+    public void displayFragment(int viewId) {
+
+        Fragment fragment = null;
+        String title = getString(R.string.app_name);
+
+        switch (viewId) {
+
+            case R.id.nav_dashboard:
+                fragment = DashboardFragment.newInstance();
+                title = "Dashboard";
+                break;
 
             case R.id.nav_radicals:
-                Intent intent = new Intent(MainActivity.this, RadicalsActivity.class);
-                startActivity(intent);
                 break;
 
             case R.id.nav_kanji:
@@ -173,31 +112,30 @@ public class MainActivity extends BaseActivity
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frameLayout, fragment);
+            ft.commit();
+        }
+
+        // Set the toolbar title
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle(title);
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
     }
 
-    @Override
-    public void showAvailableStudyQueue(StudyQueue studyQueue) {
-        lessonsCircleTextView.setText(studyQueue.studyQueueInformation.lessonsAvailable + "");
-        reviewsCircleTextView.setText(studyQueue.studyQueueInformation.reviewsAvailable + "");
+    private void setUpActionBarDrawerToggle() {
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this,
+                drawerLayout,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
     }
 
-    @Override
-    public void showReviewStudyQueue(StudyQueue studyQueue) {
-        long nextReviewDate = studyQueue.studyQueueInformation.nextReviewDate;
-        reviewDateTextView.setText("Reviews available " + TimeUtil.getTimeUntil(nextReviewDate));
-        nextHourCircleTextView.setText(studyQueue.studyQueueInformation.reviewsAvailableNextHour + "");
-        nextDayCircleTextView.setText(studyQueue.studyQueueInformation.reviewsAvailableNextDay + "");
-    }
-
-    @Override
-    public void showCriticalItems(CriticalItems criticalItems) {
-        criticalItemsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        criticalItemsRecyclerView.setAdapter(criticalItemsAdapter);
-
-        criticalItemsAdapter.setCriticalItemInformationList(criticalItems.criticalItemsInformationList);
-        criticalItemsAdapter.notifyDataSetChanged();
-    }
 }

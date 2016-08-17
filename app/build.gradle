@@ -40,6 +40,8 @@ dependencies {
 
     compile 'uk.co.chrisjenx:calligraphy:2.2.0'
 
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
     compile "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
     compile "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
 

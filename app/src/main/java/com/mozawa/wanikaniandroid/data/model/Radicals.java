@@ -65,11 +65,8 @@ public class Radicals {
         @SerializedName("user_specific")
         public UserSpecific userSpecific;
 
-        public String getCharacter() {
-            if (character != null) {
-                return character;
-            }
-            return image;
+        public boolean characterExists() {
+            return character != null;
         }
 
     }

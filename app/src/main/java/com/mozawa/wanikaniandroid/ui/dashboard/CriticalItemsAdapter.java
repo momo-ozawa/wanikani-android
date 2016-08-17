@@ -1,4 +1,4 @@
-package com.mozawa.wanikaniandroid.ui.main;
+package com.mozawa.wanikaniandroid.ui.dashboard;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

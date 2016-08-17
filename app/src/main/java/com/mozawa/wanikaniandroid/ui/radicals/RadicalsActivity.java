@@ -56,6 +56,7 @@ public class RadicalsActivity extends BaseActivity implements RadicalsMvpView {
         radicalsRecyclerView.setAdapter(radicalsAdapter);
         radicalsRecyclerView.addItemDecoration(new DividerItemDecoration(this));
 
+        radicalsAdapter.setContext(this);
         radicalsAdapter.setRadicalInformationList(radicals.radicalInformationList);
         radicalsAdapter.notifyDataSetChanged();
     }
