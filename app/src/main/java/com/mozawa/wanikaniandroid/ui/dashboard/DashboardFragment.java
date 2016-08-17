@@ -72,6 +72,7 @@ public class DashboardFragment extends BaseFragment implements DashboardMvpView 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         unbinder = ButterKnife.bind(this, view);
         ((BaseActivity) getActivity()).getActivityComponent().inject(this);

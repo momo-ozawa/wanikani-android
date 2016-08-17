@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import com.mozawa.wanikaniandroid.R;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.dashboard.DashboardFragment;
+import com.mozawa.wanikaniandroid.ui.radicals.RadicalsFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,10 +42,9 @@ public class MainActivity extends BaseActivity
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.title_activity_main);
 
-        setUpActionBarDrawerToggle();
-
+        // Set up navigation
+        setUpDrawerToggle();
         navigationView.setNavigationItemSelectedListener(this);
 
         // Show dashboard fragment as default
@@ -102,6 +102,8 @@ public class MainActivity extends BaseActivity
                 break;
 
             case R.id.nav_radicals:
+                fragment = RadicalsFragment.newInstance();
+                title = "Radicals";
                 break;
 
             case R.id.nav_kanji:
@@ -126,7 +128,7 @@ public class MainActivity extends BaseActivity
         drawerLayout.closeDrawer(GravityCompat.START);
     }
 
-    private void setUpActionBarDrawerToggle() {
+    private void setUpDrawerToggle() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this,
                 drawerLayout,

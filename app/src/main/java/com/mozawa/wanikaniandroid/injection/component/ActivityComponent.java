@@ -9,6 +9,7 @@ import com.mozawa.wanikaniandroid.ui.base.BaseFragment;
 import com.mozawa.wanikaniandroid.ui.dashboard.DashboardFragment;
 import com.mozawa.wanikaniandroid.ui.main.MainActivity;
 import com.mozawa.wanikaniandroid.ui.radicals.RadicalsActivity;
+import com.mozawa.wanikaniandroid.ui.radicals.RadicalsFragment;
 
 import dagger.Component;
 
@@ -21,6 +22,7 @@ public interface ActivityComponent {
 
     void inject(MainActivity mainActivity);
     void inject(DashboardFragment dashboardFragment);
+    void inject(RadicalsFragment radicalsFragment);
 
     void inject(WebViewActivity webViewActivity);
     void inject(RadicalsActivity radicalsActivity);
