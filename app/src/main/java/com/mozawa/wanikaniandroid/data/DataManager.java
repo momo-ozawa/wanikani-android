@@ -2,6 +2,7 @@ package com.mozawa.wanikaniandroid.data;
 
 import com.mozawa.wanikaniandroid.data.local.PreferencesHelper;
 import com.mozawa.wanikaniandroid.data.model.CriticalItems;
+import com.mozawa.wanikaniandroid.data.model.Kanji;
 import com.mozawa.wanikaniandroid.data.model.Radicals;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
 import com.mozawa.wanikaniandroid.data.remote.WaniKaniService;
@@ -31,5 +32,9 @@ public class DataManager {
 
     public Observable<Radicals> getRadicals() {
         return waniKaniService.getRadicals();
+    }
+
+    public Observable<Kanji> getKanji() {
+        return waniKaniService.getKanji();
     }
 }

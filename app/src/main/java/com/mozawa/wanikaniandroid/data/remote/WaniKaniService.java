@@ -1,6 +1,7 @@
 package com.mozawa.wanikaniandroid.data.remote;
 
 import com.mozawa.wanikaniandroid.data.model.CriticalItems;
+import com.mozawa.wanikaniandroid.data.model.Kanji;
 import com.mozawa.wanikaniandroid.data.model.Radicals;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
 
@@ -25,6 +26,12 @@ public interface WaniKaniService {
 
     @GET("radicals")
     Observable<Radicals> getRadicals();
+
+    @GET("kanji")
+    Observable<Kanji> getKanji();
+
+    /*@GET("vocabulary")
+    Observable<Vocabulary> getVocabulary();*/
 
     /******* Helper class that sets up a new service *******/
     class Creator {
