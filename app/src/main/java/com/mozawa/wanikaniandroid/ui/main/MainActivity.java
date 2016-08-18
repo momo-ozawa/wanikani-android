@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import com.mozawa.wanikaniandroid.R;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.dashboard.DashboardFragment;
+import com.mozawa.wanikaniandroid.ui.kanji.KanjiFragment;
 import com.mozawa.wanikaniandroid.ui.radicals.RadicalsFragment;
 
 import butterknife.BindView;
@@ -107,6 +108,8 @@ public class MainActivity extends BaseActivity
                 break;
 
             case R.id.nav_kanji:
+                fragment = KanjiFragment.newInstance();
+                title = "Kanji";
                 break;
 
             case R.id.nav_vocabularly:
