@@ -7,6 +7,7 @@ import com.mozawa.wanikaniandroid.ui.WebViewActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseFragment;
 import com.mozawa.wanikaniandroid.ui.dashboard.DashboardFragment;
+import com.mozawa.wanikaniandroid.ui.kanji.KanjiFragment;
 import com.mozawa.wanikaniandroid.ui.main.MainActivity;
 import com.mozawa.wanikaniandroid.ui.radicals.RadicalsFragment;
 
@@ -22,6 +23,7 @@ public interface ActivityComponent {
     void inject(MainActivity mainActivity);
     void inject(DashboardFragment dashboardFragment);
     void inject(RadicalsFragment radicalsFragment);
+    void inject(KanjiFragment kanjiFragment);
 
     void inject(WebViewActivity webViewActivity);
 }
