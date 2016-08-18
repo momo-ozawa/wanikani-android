@@ -6,24 +6,22 @@ import com.google.gson.annotations.SerializedName;
 public class UserSpecific {
 
     /*
-    "user_specific": {
-        "srs": "guru",
-        "srs_numeric": 6,
-        "unlocked_date": 1462411044,
-        "available_date": 1472232600,
-        "burned": false,
-        "burned_date": 0,
-        "meaning_correct": 5,
-        "meaning_incorrect": 0,
-        "meaning_max_streak": 5,
-        "meaning_current_streak": 5,
-        "reading_correct": null,
-        "reading_incorrect": null,
-        "reading_max_streak": null,
-        "reading_current_streak": null,
-        "meaning_note": null,
-        "user_synonyms": null
-    }
+    "srs": "guru",
+    "srs_numeric": 6,
+    "unlocked_date": 1462411044,
+    "available_date": 1472232600,
+    "burned": false,
+    "burned_date": 0,
+    "meaning_correct": 5,
+    "meaning_incorrect": 0,
+    "meaning_max_streak": 5,
+    "meaning_current_streak": 5,
+    "reading_correct": null,
+    "reading_incorrect": null,
+    "reading_max_streak": null,
+    "reading_current_streak": null,
+    "meaning_note": null,
+    "user_synonyms": null
     */
 
     public String srs;
