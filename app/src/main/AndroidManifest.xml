@@ -30,15 +30,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.main.MainActivity"/>
         </activity>
-        <activity
-            android:name=".ui.radicals.RadicalsActivity"
-            android:label="Radicals"
-            android:parentActivityName=".ui.main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.main.MainActivity"/>
-        </activity>
     </application>
 
 </manifest>
