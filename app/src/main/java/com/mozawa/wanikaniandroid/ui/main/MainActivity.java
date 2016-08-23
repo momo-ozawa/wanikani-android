@@ -11,6 +11,7 @@ import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.dashboard.DashboardFragment;
 import com.mozawa.wanikaniandroid.ui.kanji.KanjiFragment;
 import com.mozawa.wanikaniandroid.ui.radicals.RadicalsFragment;
+import com.mozawa.wanikaniandroid.ui.vocabulary.VocabularyFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,9 +49,10 @@ public class MainActivity extends BaseActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(DashboardFragment.newInstance(), "Dashboard");
+        adapter.addFragment(DashboardFragment.newInstance(), "Home");
         adapter.addFragment(RadicalsFragment.newInstance(), "Radicals");
         adapter.addFragment(KanjiFragment.newInstance(), "Kanji");
+        adapter.addFragment(VocabularyFragment.newInstance(), "Vocab");
         viewPager.setAdapter(adapter);
     }
 }
