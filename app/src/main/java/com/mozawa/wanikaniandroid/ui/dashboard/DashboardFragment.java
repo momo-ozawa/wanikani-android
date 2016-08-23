@@ -16,7 +16,7 @@ import com.mozawa.wanikaniandroid.data.model.StudyQueue;
 import com.mozawa.wanikaniandroid.ui.WebViewActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseFragment;
-import com.mozawa.wanikaniandroid.ui.util.CircleTextView;
+import com.mozawa.wanikaniandroid.ui.widgets.CircleTextView;
 import com.mozawa.wanikaniandroid.ui.util.TimeUtil;
 
 import javax.inject.Inject;
