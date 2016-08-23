@@ -62,7 +62,7 @@ public class RadicalsAdapter extends RecyclerView.Adapter<RadicalsAdapter.Radica
 
         holder.meaningTextView.setText(radical.meaning);
 
-        holder.srsTextView.setText(radical.userSpecific.srs);
+//        holder.srsTextView.setText(radical.userSpecific.srs);
     }
 
     @Override
@@ -78,8 +78,8 @@ public class RadicalsAdapter extends RecyclerView.Adapter<RadicalsAdapter.Radica
         ImageView characterImageView;
         @BindView(R.id.meaningTextView)
         TextView meaningTextView;
-        @BindView(R.id.srsTextView)
-        TextView srsTextView;
+//        @BindView(R.id.srsTextView)
+//        TextView srsTextView;
 
         public RadicalsViewHolder(View itemView) {
             super(itemView);

@@ -2,8 +2,6 @@ package com.mozawa.wanikaniandroid.ui.radicals;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,7 @@ import com.mozawa.wanikaniandroid.R;
 import com.mozawa.wanikaniandroid.data.model.Radicals;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseFragment;
-import com.mozawa.wanikaniandroid.ui.util.DividerItemDecoration;
+import com.mozawa.wanikaniandroid.ui.widgets.AutofitRecyclerView;
 
 import javax.inject.Inject;
 
@@ -28,7 +26,7 @@ public class RadicalsFragment extends BaseFragment implements RadicalsMvpView {
     RadicalsAdapter radicalsAdapter;
 
     @BindView(R.id.radicalsRecyclerView)
-    RecyclerView radicalsRecyclerView;
+    AutofitRecyclerView radicalsRecyclerView;
 
     public RadicalsFragment() {
         // Required empty public constructor
@@ -70,9 +68,8 @@ public class RadicalsFragment extends BaseFragment implements RadicalsMvpView {
 
     @Override
     public void showRadicals(Radicals radicals) {
-        radicalsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        radicalsRecyclerView.setHasFixedSize(true);
         radicalsRecyclerView.setAdapter(radicalsAdapter);
-        radicalsRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
 
         radicalsAdapter.setContext(getContext());
         radicalsAdapter.setRadicalInformationList(radicals.radicalInformationList);

@@ -2,7 +2,7 @@ package com.mozawa.wanikaniandroid.ui.util;
 
 public class TimeUtil {
 
-    /*
+    /**
      * Modified utility class based off the Google I/O 2012 app.
      */
 
