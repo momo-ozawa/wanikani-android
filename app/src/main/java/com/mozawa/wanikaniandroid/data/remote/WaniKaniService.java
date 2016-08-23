@@ -4,6 +4,7 @@ import com.mozawa.wanikaniandroid.data.model.CriticalItems;
 import com.mozawa.wanikaniandroid.data.model.Kanji;
 import com.mozawa.wanikaniandroid.data.model.Radicals;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
+import com.mozawa.wanikaniandroid.data.model.Vocabulary;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -30,8 +31,8 @@ public interface WaniKaniService {
     @GET("kanji")
     Observable<Kanji> getKanji();
 
-    /*@GET("vocabulary")
-    Observable<Vocabulary> getVocabulary();*/
+    @GET("vocabulary")
+    Observable<Vocabulary> getVocabulary();
 
     /******* Helper class that sets up a new service *******/
     class Creator {

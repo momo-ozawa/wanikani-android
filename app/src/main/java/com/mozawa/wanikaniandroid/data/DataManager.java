@@ -5,6 +5,7 @@ import com.mozawa.wanikaniandroid.data.model.CriticalItems;
 import com.mozawa.wanikaniandroid.data.model.Kanji;
 import com.mozawa.wanikaniandroid.data.model.Radicals;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
+import com.mozawa.wanikaniandroid.data.model.Vocabulary;
 import com.mozawa.wanikaniandroid.data.remote.WaniKaniService;
 
 import javax.inject.Inject;
@@ -36,5 +37,9 @@ public class DataManager {
 
     public Observable<Kanji> getKanji() {
         return waniKaniService.getKanji();
+    }
+
+    public Observable<Vocabulary> getVocabulary() {
+        return waniKaniService.getVocabulary();
     }
 }
