@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp">
 
-                <com.mozawa.wanikaniandroid.ui.util.CircleTextView
+                <com.mozawa.wanikaniandroid.ui.widgets.CircleTextView
                     android:id="@+id/lessonsCircleTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp">
 
-                <com.mozawa.wanikaniandroid.ui.util.CircleTextView
+                <com.mozawa.wanikaniandroid.ui.widgets.CircleTextView
                     android:id="@+id/reviewsCircleTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

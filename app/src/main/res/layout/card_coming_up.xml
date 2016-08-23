@@ -40,7 +40,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="16dp">
 
-                <com.mozawa.wanikaniandroid.ui.util.CircleTextView
+                <com.mozawa.wanikaniandroid.ui.widgets.CircleTextView
                     android:id="@+id/nextHourCircleTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp">
 
-                <com.mozawa.wanikaniandroid.ui.util.CircleTextView
+                <com.mozawa.wanikaniandroid.ui.widgets.CircleTextView
                     android:id="@+id/nextDayCircleTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
