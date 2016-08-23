@@ -28,13 +28,13 @@ public class CircleTextView extends RelativeLayout {
 
     public CircleTextView(Context context) {
         super(context);
-        super.inflate(context, R.layout.view_circle_text_view, this);
+        super.inflate(context, R.layout.widget_circle_text_view, this);
         ButterKnife.bind(this);
     }
 
     public CircleTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        super.inflate(context, R.layout.view_circle_text_view, this);
+        super.inflate(context, R.layout.widget_circle_text_view, this);
         ButterKnife.bind(this);
 
         TypedArray array = context.getTheme().obtainStyledAttributes(
