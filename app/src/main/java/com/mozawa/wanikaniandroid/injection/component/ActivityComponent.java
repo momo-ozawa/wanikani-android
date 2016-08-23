@@ -10,6 +10,7 @@ import com.mozawa.wanikaniandroid.ui.dashboard.DashboardFragment;
 import com.mozawa.wanikaniandroid.ui.kanji.KanjiFragment;
 import com.mozawa.wanikaniandroid.ui.main.MainActivity;
 import com.mozawa.wanikaniandroid.ui.radicals.RadicalsFragment;
+import com.mozawa.wanikaniandroid.ui.vocabulary.VocabularyFragment;
 
 import dagger.Component;
 
@@ -24,6 +25,7 @@ public interface ActivityComponent {
     void inject(DashboardFragment dashboardFragment);
     void inject(RadicalsFragment radicalsFragment);
     void inject(KanjiFragment kanjiFragment);
+    void inject(VocabularyFragment vocabularyFragment);
 
     void inject(WebViewActivity webViewActivity);
 }
