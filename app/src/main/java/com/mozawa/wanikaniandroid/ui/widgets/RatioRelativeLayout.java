@@ -14,8 +14,8 @@ public class RatioRelativeLayout extends RelativeLayout {
      *   http://stackoverflow.com/a/29320794\
      */
 
-    private static final double WIDTH_RATIO = 4;
-    private static final double HEIGHT_RATIO = 5;
+    private static final double WIDTH_RATIO = 3;
+    private static final double HEIGHT_RATIO = 4;
 
     public RatioRelativeLayout(Context context) {
         super(context);

@@ -49,6 +49,7 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
         Kanji.KanjiInformation kanji = kanjiInformationList.get(position);
 
         holder.characterTextView.setText(kanji.character);
+        holder.meaningTextView.setText(kanji.meaning);
     }
 
     @Override
@@ -60,6 +61,8 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
 
         @BindView(R.id.characterTextView)
         TextView characterTextView;
+        @BindView(R.id.meaningTextView)
+        TextView meaningTextView;
 
         public KanjiViewHolder(View itemView) {
             super(itemView);

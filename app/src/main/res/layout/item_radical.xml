@@ -3,12 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="1dp"
+    android:layout_margin="0.5dp"
     android:background="@android:color/white">
 
     <RelativeLayout
+        android:id="@+id/characterRelativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="100dp">
 
         <TextView
             android:id="@+id/characterTextView"
@@ -28,15 +29,14 @@
             android:visibility="gone"
             />
 
-        <TextView
-            android:id="@+id/meaningTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="16dp"
-            />
-
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/meaningTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/characterRelativeLayout"
+        android:layout_centerHorizontal="true"
+        />
 
 </com.mozawa.wanikaniandroid.ui.widgets.RatioRelativeLayout>
