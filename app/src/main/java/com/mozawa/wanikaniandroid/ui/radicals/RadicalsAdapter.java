@@ -2,6 +2,7 @@ package com.mozawa.wanikaniandroid.ui.radicals;
 
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,13 +57,32 @@ public class RadicalsAdapter extends RecyclerView.Adapter<RadicalsAdapter.Radica
             holder.characterImageView.setVisibility(View.GONE);
         } else {
             Picasso.with(context).load(radical.image).into(holder.characterImageView);
+            holder.characterImageView.setColorFilter(ContextCompat.getColor(context, android.R.color.tertiary_text_light));
             holder.characterImageView.setVisibility(View.VISIBLE);
             holder.characterTextView.setVisibility(View.GONE);
         }
 
         holder.meaningTextView.setText(radical.meaning);
 
-//        holder.srsTextView.setText(radical.userSpecific.srs);
+        int color = -1;
+        switch (radical.userSpecific.srs) {
+            case "apprentice":
+                color = android.R.color.holo_blue_bright;
+                break;
+            case "guru":
+                color = android.R.color.holo_blue_dark;
+                break;
+            case "master":
+                color = R.color.colorAccent;
+                break;
+            case "enlightened":
+                color = R.color.colorAccent;
+                break;
+            case "burned":
+                color = R.color.colorAccent;
+                break;
+        }
+        holder.srsLevelView.setBackgroundColor(ContextCompat.getColor(context, color));
     }
 
     @Override
@@ -78,8 +98,8 @@ public class RadicalsAdapter extends RecyclerView.Adapter<RadicalsAdapter.Radica
         ImageView characterImageView;
         @BindView(R.id.meaningTextView)
         TextView meaningTextView;
-//        @BindView(R.id.srsTextView)
-//        TextView srsTextView;
+        @BindView(R.id.srsLevelView)
+        View srsLevelView;
 
         public RadicalsViewHolder(View itemView) {
             super(itemView);
