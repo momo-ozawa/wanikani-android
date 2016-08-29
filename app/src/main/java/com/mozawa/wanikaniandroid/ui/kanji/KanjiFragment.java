@@ -4,6 +4,7 @@ package com.mozawa.wanikaniandroid.ui.kanji;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +14,11 @@ import com.mozawa.wanikaniandroid.data.model.Kanji;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseFragment;
 import com.mozawa.wanikaniandroid.ui.util.DividerItemDecoration;
-import com.mozawa.wanikaniandroid.ui.widgets.AutofitRecyclerView;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.mozawa.wanikaniandroid.R.id.radicalsRecyclerView;
 
 public class KanjiFragment extends BaseFragment implements KanjiMvpView {
 
@@ -31,7 +29,7 @@ public class KanjiFragment extends BaseFragment implements KanjiMvpView {
     KanjiAdapter kanjiAdapter;
 
     @BindView(R.id.kanjiRecyclerView)
-    AutofitRecyclerView kanjiRecyclerView;
+    RecyclerView kanjiRecyclerView;
 
     public KanjiFragment() {
         // Required empty public constructor
@@ -74,8 +72,9 @@ public class KanjiFragment extends BaseFragment implements KanjiMvpView {
 
     @Override
     public void showKanji(Kanji kanji) {
-        kanjiRecyclerView.setHasFixedSize(true);
+        kanjiRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         kanjiRecyclerView.setAdapter(kanjiAdapter);
+        kanjiRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
 
         kanjiAdapter.setContext(getContext());
         kanjiAdapter.setKanjiInformationList(kanji.kanjiInformationList);
