@@ -67,19 +67,19 @@ public class RadicalsAdapter extends RecyclerView.Adapter<RadicalsAdapter.Radica
         int color = -1;
         switch (radical.userSpecific.srs) {
             case "apprentice":
-                color = android.R.color.holo_blue_bright;
+                color = R.color.apprentice;
                 break;
             case "guru":
-                color = android.R.color.holo_blue_dark;
+                color = R.color.guru;
                 break;
             case "master":
-                color = R.color.colorAccent;
+                color = R.color.master;
                 break;
             case "enlightened":
-                color = R.color.colorAccent;
+                color = R.color.enlightened;
                 break;
             case "burned":
-                color = R.color.colorAccent;
+                color = R.color.burned;
                 break;
         }
         holder.srsLevelView.setBackgroundColor(ContextCompat.getColor(context, color));

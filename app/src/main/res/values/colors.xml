@@ -3,5 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="lightGrey200">#B0BEC5</color>
+    <color name="blueGrey200">#B0BEC5</color>
+
+    <!--SRS colors-->
+    <color name="apprentice">#FF4081</color>
+    <color name="guru">#A135BB</color>
+    <color name="master">#3557DD</color>
+    <color name="enlightened">#009BE9</color>
+    <color name="burned">#37474F</color>
 </resources>
