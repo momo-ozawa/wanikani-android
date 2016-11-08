@@ -33,7 +33,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    WaniKaniService provideWaniKaniServie() {
+    WaniKaniService provideWaniKaniService() {
         return WaniKaniService.Creator.newWaniKaniService();
     }
 }

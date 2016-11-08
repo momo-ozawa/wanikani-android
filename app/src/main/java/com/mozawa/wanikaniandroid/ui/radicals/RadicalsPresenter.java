@@ -6,6 +6,7 @@ import android.util.Log;
 import com.mozawa.wanikaniandroid.data.DataManager;
 import com.mozawa.wanikaniandroid.data.model.Radicals;
 import com.mozawa.wanikaniandroid.ui.base.BasePresenter;
+import com.mozawa.wanikaniandroid.util.RxUtil;
 
 import javax.inject.Inject;
 
@@ -43,7 +44,7 @@ public class RadicalsPresenter extends BasePresenter<RadicalsMvpView> {
 
     public void loadRadicals() {
         checkViewAttached();
-
+        RxUtil.unsubscribe(radicalsSubscription);
         radicalsSubscription = dataManager.getRadicals()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

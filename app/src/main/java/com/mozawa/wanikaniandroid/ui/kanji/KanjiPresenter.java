@@ -6,6 +6,7 @@ import android.util.Log;
 import com.mozawa.wanikaniandroid.data.DataManager;
 import com.mozawa.wanikaniandroid.data.model.Kanji;
 import com.mozawa.wanikaniandroid.ui.base.BasePresenter;
+import com.mozawa.wanikaniandroid.util.RxUtil;
 
 import javax.inject.Inject;
 
@@ -42,7 +43,7 @@ public class KanjiPresenter extends BasePresenter<KanjiMvpView> {
 
     public void loadKanji() {
         checkViewAttached();
-
+        RxUtil.unsubscribe(kanjiSubscription);
         kanjiSubscription = dataManager.getKanji()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

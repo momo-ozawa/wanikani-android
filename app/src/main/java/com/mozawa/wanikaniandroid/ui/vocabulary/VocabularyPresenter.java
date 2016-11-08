@@ -6,6 +6,7 @@ import android.util.Log;
 import com.mozawa.wanikaniandroid.data.DataManager;
 import com.mozawa.wanikaniandroid.data.model.Vocabulary;
 import com.mozawa.wanikaniandroid.ui.base.BasePresenter;
+import com.mozawa.wanikaniandroid.util.RxUtil;
 
 import javax.inject.Inject;
 
@@ -42,7 +43,7 @@ public class VocabularyPresenter extends BasePresenter<VocabularyMvpView> {
 
     public void loadVocabulary() {
         checkViewAttached();
-
+        RxUtil.unsubscribe(vocabularySubscription);
         vocabularySubscription = dataManager.getVocabulary()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

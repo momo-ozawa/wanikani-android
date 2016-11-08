@@ -7,6 +7,7 @@ import com.mozawa.wanikaniandroid.data.DataManager;
 import com.mozawa.wanikaniandroid.data.model.CriticalItems;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
 import com.mozawa.wanikaniandroid.ui.base.BasePresenter;
+import com.mozawa.wanikaniandroid.util.RxUtil;
 
 import javax.inject.Inject;
 
@@ -50,7 +51,7 @@ public class DashboardPresenter extends BasePresenter<DashboardMvpView> {
 
     public void loadStudyQueue() {
         checkViewAttached();
-
+        RxUtil.unsubscribe(studyQueueSubscription);
         studyQueueSubscription = dataManager.getStudyQueue()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -75,7 +76,7 @@ public class DashboardPresenter extends BasePresenter<DashboardMvpView> {
 
     public void loadCriticalItems() {
         checkViewAttached();
-
+        RxUtil.unsubscribe(criticalItemsSubscription);
         criticalItemsSubscription = dataManager.getCriticalItems()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
