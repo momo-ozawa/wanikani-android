@@ -55,5 +55,16 @@ public class Kanji {
         @SerializedName("user_specific")
         public UserSpecific userSpecific;
 
+        public void setCharacter(String character) {
+            this.character = character;
+        }
+
+        public void setMeaning(String meaning) {
+            this.meaning = meaning;
+        }
+
+        public void setOnyomi(String onyomi) {
+            this.onyomi = onyomi;
+        }
     }
 }
