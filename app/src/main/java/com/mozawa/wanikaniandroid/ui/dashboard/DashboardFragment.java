@@ -11,13 +11,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.mozawa.wanikaniandroid.R;
-import com.mozawa.wanikaniandroid.data.model.CriticalItems;
+import com.mozawa.wanikaniandroid.data.model.CriticalItem;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
 import com.mozawa.wanikaniandroid.ui.WebViewActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseFragment;
-import com.mozawa.wanikaniandroid.ui.widgets.CircleTextView;
 import com.mozawa.wanikaniandroid.ui.util.TimeUtil;
+import com.mozawa.wanikaniandroid.ui.widgets.CircleTextView;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -96,24 +98,24 @@ public class DashboardFragment extends BaseFragment implements DashboardMvpView 
 
     @Override
     public void showAvailableStudyQueue(StudyQueue studyQueue) {
-        lessonsCircleTextView.setText(studyQueue.studyQueueInformation.lessonsAvailable + "");
-        reviewsCircleTextView.setText(studyQueue.studyQueueInformation.reviewsAvailable + "");
+        lessonsCircleTextView.setText(studyQueue.lessonsAvailable + "");
+        reviewsCircleTextView.setText(studyQueue.reviewsAvailable + "");
     }
 
     @Override
     public void showReviewStudyQueue(StudyQueue studyQueue) {
-        long nextReviewDate = studyQueue.studyQueueInformation.nextReviewDate;
+        long nextReviewDate = studyQueue.nextReviewDate;
         reviewDateTextView.setText("Reviews available " + TimeUtil.getTimeUntil(nextReviewDate));
-        nextHourCircleTextView.setText(studyQueue.studyQueueInformation.reviewsAvailableNextHour + "");
-        nextDayCircleTextView.setText(studyQueue.studyQueueInformation.reviewsAvailableNextDay + "");
+        nextHourCircleTextView.setText(studyQueue.reviewsAvailableNextHour + "");
+        nextDayCircleTextView.setText(studyQueue.reviewsAvailableNextDay + "");
     }
 
     @Override
-    public void showCriticalItems(CriticalItems criticalItems) {
+    public void showCriticalItems(List<CriticalItem> criticalItemList) {
         criticalItemsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         criticalItemsRecyclerView.setAdapter(criticalItemsAdapter);
 
-        criticalItemsAdapter.setCriticalItemInformationList(criticalItems.criticalItemsInformationList);
+        criticalItemsAdapter.setCriticalItemList(criticalItemList);
         criticalItemsAdapter.notifyDataSetChanged();
     }
 

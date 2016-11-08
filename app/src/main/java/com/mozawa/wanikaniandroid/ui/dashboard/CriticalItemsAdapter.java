@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mozawa.wanikaniandroid.R;
-import com.mozawa.wanikaniandroid.data.model.CriticalItems;
+import com.mozawa.wanikaniandroid.data.model.CriticalItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +19,15 @@ import butterknife.ButterKnife;
 
 public class CriticalItemsAdapter extends RecyclerView.Adapter<CriticalItemsAdapter.CriticalItemsViewHolder> {
 
-    private List<CriticalItems.CriticalItemInformation> criticalItemInformationList;
+    private List<CriticalItem> criticalItemList;
 
     @Inject
     public CriticalItemsAdapter() {
-        criticalItemInformationList = new ArrayList<>();
+        criticalItemList = new ArrayList<>();
     }
 
-    public void setCriticalItemInformationList(List<CriticalItems.CriticalItemInformation> criticalItemInformationList) {
-        this.criticalItemInformationList = criticalItemInformationList;
+    public void setCriticalItemList(List<CriticalItem> criticalItemList) {
+        this.criticalItemList = criticalItemList;
     }
 
     @Override
@@ -39,14 +39,14 @@ public class CriticalItemsAdapter extends RecyclerView.Adapter<CriticalItemsAdap
 
     @Override
     public void onBindViewHolder(CriticalItemsViewHolder holder, int position) {
-        CriticalItems.CriticalItemInformation criticalItem = criticalItemInformationList.get(position);
+        CriticalItem criticalItem = criticalItemList.get(position);
         holder.characterTextView.setText(criticalItem.getCharacter() + " " + criticalItem.meaning);
         holder.percentageTextView.setText(criticalItem.percentage);
     }
 
     @Override
     public int getItemCount() {
-        return criticalItemInformationList.size();
+        return criticalItemList.size();
     }
 
     public class CriticalItemsViewHolder extends RecyclerView.ViewHolder {

@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mozawa.wanikaniandroid.R;
-import com.mozawa.wanikaniandroid.data.model.Radicals;
+import com.mozawa.wanikaniandroid.data.model.Radical;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -25,19 +25,19 @@ import butterknife.ButterKnife;
 public class RadicalsAdapter extends RecyclerView.Adapter<RadicalsAdapter.RadicalsViewHolder> {
 
     private Context context;
-    private List<Radicals.RadicalInformation> radicalInformationList;
+    private List<Radical> radicalList;
 
     @Inject
     public RadicalsAdapter() {
-        radicalInformationList = new ArrayList<>();
+        radicalList = new ArrayList<>();
     }
 
     public void setContext(Context context) {
         this.context = context;
     }
 
-    public void setRadicalInformationList(List<Radicals.RadicalInformation> radicalInformationList) {
-        this.radicalInformationList = radicalInformationList;
+    public void setRadicalList(List<Radical> radicalList) {
+        this.radicalList = radicalList;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class RadicalsAdapter extends RecyclerView.Adapter<RadicalsAdapter.Radica
 
     @Override
     public void onBindViewHolder(RadicalsViewHolder holder, int position) {
-        Radicals.RadicalInformation radical = radicalInformationList.get(position);
+        Radical radical = radicalList.get(position);
 
         if (radical.characterExists()) {
             holder.characterTextView.setText(radical.character);
@@ -82,12 +82,16 @@ public class RadicalsAdapter extends RecyclerView.Adapter<RadicalsAdapter.Radica
                 color = R.color.burned;
                 break;
         }
-        holder.srsLevelView.setBackgroundColor(ContextCompat.getColor(context, color));
+
+        if (color != -1) {
+            holder.srsLevelView.setBackgroundColor(ContextCompat.getColor(context, color));
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return radicalInformationList.size();
+        return radicalList.size();
     }
 
     public class RadicalsViewHolder extends RecyclerView.ViewHolder {

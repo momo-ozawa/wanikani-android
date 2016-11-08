@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Radicals {
+public class RadicalResponse {
 
     /*
     {
@@ -54,20 +54,6 @@ public class Radicals {
     @SerializedName("user_information")
     public UserInformation userInformation;
     @SerializedName("requested_information")
-    public List<RadicalInformation> radicalInformationList;
+    public List<Radical> radicalList;
 
-    public static class RadicalInformation {
-
-        public String character;
-        public String meaning;
-        public String image;
-        public int level;
-        @SerializedName("user_specific")
-        public UserSpecific userSpecific;
-
-        public boolean characterExists() {
-            return character != null;
-        }
-
-    }
 }

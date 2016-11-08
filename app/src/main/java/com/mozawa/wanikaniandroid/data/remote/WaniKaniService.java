@@ -1,10 +1,10 @@
 package com.mozawa.wanikaniandroid.data.remote;
 
-import com.mozawa.wanikaniandroid.data.model.CriticalItems;
-import com.mozawa.wanikaniandroid.data.model.Kanji;
-import com.mozawa.wanikaniandroid.data.model.Radicals;
-import com.mozawa.wanikaniandroid.data.model.StudyQueue;
-import com.mozawa.wanikaniandroid.data.model.Vocabulary;
+import com.mozawa.wanikaniandroid.data.model.CriticalItemResponse;
+import com.mozawa.wanikaniandroid.data.model.KanjiResponse;
+import com.mozawa.wanikaniandroid.data.model.RadicalResponse;
+import com.mozawa.wanikaniandroid.data.model.StudyQueueResponse;
+import com.mozawa.wanikaniandroid.data.model.VocabularyReponse;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -20,19 +20,19 @@ public interface WaniKaniService {
     String API_KEY = "6984123dc766bdf49edfe44dfa653c6d/";
 
     @GET("study-queue")
-    Observable<StudyQueue> getStudyQueue();
+    Observable<StudyQueueResponse> getStudyQueue();
 
     @GET("critical-items")
-    Observable<CriticalItems> getCriticalItems();
+    Observable<CriticalItemResponse> getCriticalItems();
 
     @GET("radicals")
-    Observable<Radicals> getRadicals();
+    Observable<RadicalResponse> getRadicals();
 
     @GET("kanji")
-    Observable<Kanji> getKanji();
+    Observable<KanjiResponse> getKanji();
 
     @GET("vocabulary")
-    Observable<Vocabulary> getVocabulary();
+    Observable<VocabularyReponse> getVocabulary();
 
     /******* Helper class that sets up a new service *******/
     class Creator {

@@ -15,6 +15,8 @@ import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseFragment;
 import com.mozawa.wanikaniandroid.ui.util.DividerItemDecoration;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -70,13 +72,13 @@ public class VocabularyFragment extends BaseFragment implements VocabularyMvpVie
     }
 
     @Override
-    public void showVocabulary(Vocabulary vocabulary) {
+    public void showVocabulary(List<Vocabulary> vocabularyList) {
         vocabularyRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         vocabularyRecyclerView.setAdapter(vocabularyAdapter);
         vocabularyRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
 
         vocabularyAdapter.setContext(getContext());
-        vocabularyAdapter.setRadicalInformationList(vocabulary.vocabularyInformationList);
+        vocabularyAdapter.setVocabularyList(vocabularyList);
         vocabularyAdapter.notifyDataSetChanged();
     }
 }

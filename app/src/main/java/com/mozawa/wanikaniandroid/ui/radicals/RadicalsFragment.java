@@ -7,10 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mozawa.wanikaniandroid.R;
-import com.mozawa.wanikaniandroid.data.model.Radicals;
+import com.mozawa.wanikaniandroid.data.model.Radical;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseFragment;
 import com.mozawa.wanikaniandroid.ui.widgets.AutofitRecyclerView;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -67,12 +69,12 @@ public class RadicalsFragment extends BaseFragment implements RadicalsMvpView {
     }
 
     @Override
-    public void showRadicals(Radicals radicals) {
+    public void showRadicals(List<Radical> radicalList) {
         radicalsRecyclerView.setHasFixedSize(true);
         radicalsRecyclerView.setAdapter(radicalsAdapter);
 
         radicalsAdapter.setContext(getContext());
-        radicalsAdapter.setRadicalInformationList(radicals.radicalInformationList);
+        radicalsAdapter.setRadicalList(radicalList);
         radicalsAdapter.notifyDataSetChanged();
     }
 }

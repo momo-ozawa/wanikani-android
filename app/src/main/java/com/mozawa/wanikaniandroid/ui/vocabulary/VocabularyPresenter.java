@@ -8,6 +8,8 @@ import com.mozawa.wanikaniandroid.data.model.Vocabulary;
 import com.mozawa.wanikaniandroid.ui.base.BasePresenter;
 import com.mozawa.wanikaniandroid.util.RxUtil;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import rx.Subscriber;
@@ -47,7 +49,7 @@ public class VocabularyPresenter extends BasePresenter<VocabularyMvpView> {
         vocabularySubscription = dataManager.getVocabulary()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<Vocabulary>() {
+                .subscribe(new Subscriber<List<Vocabulary>>() {
                     @Override
                     public void onCompleted() {
 
@@ -59,8 +61,8 @@ public class VocabularyPresenter extends BasePresenter<VocabularyMvpView> {
                     }
 
                     @Override
-                    public void onNext(Vocabulary vocabulary) {
-                        getMvpView().showVocabulary(vocabulary);
+                    public void onNext(List<Vocabulary> vocabularyList) {
+                        getMvpView().showVocabulary(vocabularyList);
                     }
                 });
     }

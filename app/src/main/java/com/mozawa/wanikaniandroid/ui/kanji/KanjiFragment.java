@@ -15,6 +15,8 @@ import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseFragment;
 import com.mozawa.wanikaniandroid.ui.util.DividerItemDecoration;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -71,13 +73,13 @@ public class KanjiFragment extends BaseFragment implements KanjiMvpView {
 
 
     @Override
-    public void showKanji(Kanji kanji) {
+    public void showKanji(List<Kanji> kanjiList) {
         kanjiRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         kanjiRecyclerView.setAdapter(kanjiAdapter);
         kanjiRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
 
         kanjiAdapter.setContext(getContext());
-        kanjiAdapter.setKanjiInformationList(kanji.kanjiInformationList);
+        kanjiAdapter.setKanjiList(kanjiList);
         kanjiAdapter.notifyDataSetChanged();
     }
 }

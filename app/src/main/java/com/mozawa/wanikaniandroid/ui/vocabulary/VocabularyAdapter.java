@@ -18,19 +18,19 @@ import javax.inject.Inject;
 public class VocabularyAdapter extends RecyclerView.Adapter<VocabularyAdapter.VocabularyViewHolder> {
 
     private Context context;
-    private List<Vocabulary.VocabularyInformation> vocabularyInformationList;
+    private List<Vocabulary> vocabularyList;
 
     @Inject
     public VocabularyAdapter() {
-        vocabularyInformationList = new ArrayList<>();
+        vocabularyList = new ArrayList<>();
     }
 
     public void setContext(Context context) {
         this.context = context;
     }
 
-    public void setRadicalInformationList(List<Vocabulary.VocabularyInformation> vocabularyInformationList) {
-        this.vocabularyInformationList = vocabularyInformationList;
+    public void setVocabularyList(List<Vocabulary> vocabularyList) {
+        this.vocabularyList = vocabularyList;
     }
 
     @Override
@@ -42,12 +42,12 @@ public class VocabularyAdapter extends RecyclerView.Adapter<VocabularyAdapter.Vo
 
     @Override
     public void onBindViewHolder(VocabularyViewHolder holder, int position) {
-        Vocabulary.VocabularyInformation vocabulary = vocabularyInformationList.get(position);
+        Vocabulary vocabulary = vocabularyList.get(position);
     }
 
     @Override
     public int getItemCount() {
-        return vocabularyInformationList.size();
+        return vocabularyList.size();
     }
 
 

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class CriticalItems {
+public class CriticalItemResponse {
     /*
     {
       "user_information": {
@@ -36,23 +36,6 @@ public class CriticalItems {
     @SerializedName("user_information")
     public UserInformation userInformation;
     @SerializedName("requested_information")
-    public List<CriticalItemInformation> criticalItemsInformationList;
-
-    public static class CriticalItemInformation {
-
-        public String type;
-        public String character;
-        public String meaning;
-        public String image;
-        public int level;
-        public String percentage;
-
-        public String getCharacter() {
-            if (character != null) {
-                return character;
-            }
-            return image;
-        }
-    }
+    public List<CriticalItem> criticalItemList;
 
 }

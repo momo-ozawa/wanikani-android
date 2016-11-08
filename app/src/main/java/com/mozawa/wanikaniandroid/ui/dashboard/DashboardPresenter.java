@@ -4,10 +4,12 @@ package com.mozawa.wanikaniandroid.ui.dashboard;
 import android.util.Log;
 
 import com.mozawa.wanikaniandroid.data.DataManager;
-import com.mozawa.wanikaniandroid.data.model.CriticalItems;
+import com.mozawa.wanikaniandroid.data.model.CriticalItem;
 import com.mozawa.wanikaniandroid.data.model.StudyQueue;
 import com.mozawa.wanikaniandroid.ui.base.BasePresenter;
 import com.mozawa.wanikaniandroid.util.RxUtil;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -80,7 +82,7 @@ public class DashboardPresenter extends BasePresenter<DashboardMvpView> {
         criticalItemsSubscription = dataManager.getCriticalItems()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<CriticalItems>() {
+                .subscribe(new Observer<List<CriticalItem>>() {
                     @Override
                     public void onCompleted() {
 
@@ -92,8 +94,8 @@ public class DashboardPresenter extends BasePresenter<DashboardMvpView> {
                     }
 
                     @Override
-                    public void onNext(CriticalItems criticalItems) {
-                        getMvpView().showCriticalItems(criticalItems);
+                    public void onNext(List<CriticalItem> criticalItemList) {
+                        getMvpView().showCriticalItems(criticalItemList);
                     }
                 });
     }

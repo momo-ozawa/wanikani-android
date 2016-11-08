@@ -4,9 +4,12 @@ package com.mozawa.wanikaniandroid.ui.radicals;
 import android.util.Log;
 
 import com.mozawa.wanikaniandroid.data.DataManager;
-import com.mozawa.wanikaniandroid.data.model.Radicals;
+import com.mozawa.wanikaniandroid.data.model.Radical;
+import com.mozawa.wanikaniandroid.data.model.RadicalResponse;
 import com.mozawa.wanikaniandroid.ui.base.BasePresenter;
 import com.mozawa.wanikaniandroid.util.RxUtil;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -48,7 +51,7 @@ public class RadicalsPresenter extends BasePresenter<RadicalsMvpView> {
         radicalsSubscription = dataManager.getRadicals()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<Radicals>() {
+                .subscribe(new Subscriber<List<Radical>>() {
                     @Override
                     public void onCompleted() {
 
@@ -60,8 +63,8 @@ public class RadicalsPresenter extends BasePresenter<RadicalsMvpView> {
                     }
 
                     @Override
-                    public void onNext(Radicals radicals) {
-                        getMvpView().showRadicals(radicals);
+                    public void onNext(List<Radical> radicalList) {
+                        getMvpView().showRadicals(radicalList);
                     }
                 });
     }

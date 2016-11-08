@@ -8,6 +8,8 @@ import com.mozawa.wanikaniandroid.data.model.Kanji;
 import com.mozawa.wanikaniandroid.ui.base.BasePresenter;
 import com.mozawa.wanikaniandroid.util.RxUtil;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import rx.Subscriber;
@@ -47,7 +49,7 @@ public class KanjiPresenter extends BasePresenter<KanjiMvpView> {
         kanjiSubscription = dataManager.getKanji()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<Kanji>() {
+                .subscribe(new Subscriber<List<Kanji>>() {
                     @Override
                     public void onCompleted() {
 
@@ -59,9 +61,8 @@ public class KanjiPresenter extends BasePresenter<KanjiMvpView> {
                     }
 
                     @Override
-                    public void onNext(Kanji kanji) {
-                        getMvpView().showKanji(kanji);
-                        Log.d(TAG, kanji.kanjiInformationList.size() + "");
+                    public void onNext(List<Kanji> kanjiList) {
+                        getMvpView().showKanji(kanjiList);
                     }
                 });
     }

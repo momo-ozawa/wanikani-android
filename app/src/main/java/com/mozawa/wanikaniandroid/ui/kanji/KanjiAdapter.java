@@ -22,19 +22,19 @@ import butterknife.ButterKnife;
 public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHolder> {
 
     private Context context;
-    private List<Kanji.KanjiInformation> kanjiInformationList;
+    private List<Kanji> kanjiList;
 
     @Inject
     public KanjiAdapter() {
-        kanjiInformationList = new ArrayList<>();
+        kanjiList = new ArrayList<>();
     }
 
     public void setContext(Context context) {
         this.context = context;
     }
 
-    public void setKanjiInformationList(List<Kanji.KanjiInformation> kanjiInformationList) {
-        this.kanjiInformationList = kanjiInformationList;
+    public void setKanjiList(List<Kanji> kanjiList) {
+        this.kanjiList = kanjiList;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
 
     @Override
     public void onBindViewHolder(KanjiViewHolder holder, int position) {
-        Kanji.KanjiInformation kanji = kanjiInformationList.get(position);
+        Kanji kanji = kanjiList.get(position);
 
         holder.characterTextView.setText(kanji.character);
         holder.onyomiTextView.setText(kanji.onyomi);
@@ -55,7 +55,7 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
 
     @Override
     public int getItemCount() {
-        return kanjiInformationList.size();
+        return kanjiList.size();
     }
 
     public class KanjiViewHolder extends RecyclerView.ViewHolder {
