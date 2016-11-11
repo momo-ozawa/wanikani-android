@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.mozawa.wanikaniandroid.R;
 import com.mozawa.wanikaniandroid.data.model.Radical;
@@ -19,6 +21,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.mozawa.wanikaniandroid.R.id.kanjiMessageTextView;
+import static com.mozawa.wanikaniandroid.R.id.kanjiRecyclerView;
+
 public class RadicalsFragment extends BaseFragment implements RadicalsMvpView {
 
     @Inject
@@ -29,6 +34,10 @@ public class RadicalsFragment extends BaseFragment implements RadicalsMvpView {
 
     @BindView(R.id.radicalsRecyclerView)
     AutofitRecyclerView radicalsRecyclerView;
+    @BindView(R.id.radicalsMessageTextView)
+    TextView radicalsMessageTextView;
+    @BindView(R.id.radicalsProgressBar)
+    ProgressBar radicalsProgressBar;
 
     public RadicalsFragment() {
         // Required empty public constructor
@@ -68,6 +77,21 @@ public class RadicalsFragment extends BaseFragment implements RadicalsMvpView {
         super.onDetach();
     }
 
+    /********
+     * RadicalsMvpView implementation
+     *******/
+
+    @Override
+    public void showProgressBar(boolean show) {
+        if (show) {
+            radicalsProgressBar.setVisibility(View.VISIBLE);
+            radicalsRecyclerView.setVisibility(View.GONE);
+            radicalsMessageTextView.setVisibility(View.GONE);
+        } else {
+            radicalsProgressBar.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     public void showRadicals(List<Radical> radicalList) {
         radicalsRecyclerView.setHasFixedSize(true);
@@ -76,5 +100,21 @@ public class RadicalsFragment extends BaseFragment implements RadicalsMvpView {
         radicalsAdapter.setContext(getContext());
         radicalsAdapter.setRadicalList(radicalList);
         radicalsAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showRadicalsEmpty() {
+        showMessage("No radicals to show.");
+    }
+
+    @Override
+    public void showError() {
+        showMessage("There was an error loading the radicals.");
+    }
+
+    public void showMessage(String message) {
+        radicalsRecyclerView.setVisibility(View.GONE);
+        radicalsMessageTextView.setVisibility(View.VISIBLE);
+        radicalsMessageTextView.setText(message);
     }
 }

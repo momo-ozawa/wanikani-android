@@ -111,12 +111,12 @@ public class KanjiFragment extends BaseFragment implements KanjiMvpView {
 
     @Override
     public void showKanjiEmpty() {
-        showMessage("No kanji to show... yet!");
+        showMessage("No kanji to show.");
     }
 
     @Override
     public void showError() {
-        showMessage("There was an error loading the kanji");
+        showMessage("There was an error loading the kanji.");
     }
 
     public void showMessage(String message) {

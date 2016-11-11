@@ -1,6 +1,7 @@
 package sharedTest;
 
 import com.mozawa.wanikaniandroid.data.model.Kanji;
+import com.mozawa.wanikaniandroid.data.model.Radical;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,4 +24,11 @@ public class TestDataFactory {
         return kanji;
     }
 
+    public static List<Radical> makeRadicalList(int number) {
+        List<Radical> radicalList = new ArrayList<>();
+        for (int i = 0; i < number; i++) {
+            radicalList.add(new Radical());
+        }
+        return radicalList;
+    }
 }

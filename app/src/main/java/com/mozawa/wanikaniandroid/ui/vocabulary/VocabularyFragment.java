@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.mozawa.wanikaniandroid.R;
 import com.mozawa.wanikaniandroid.data.model.Vocabulary;
@@ -22,6 +24,10 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.mozawa.wanikaniandroid.R.id.kanjiMessageTextView;
+import static com.mozawa.wanikaniandroid.R.id.kanjiProgressBar;
+import static com.mozawa.wanikaniandroid.R.id.kanjiRecyclerView;
+
 public class VocabularyFragment extends BaseFragment implements VocabularyMvpView {
 
     @Inject
@@ -30,8 +36,13 @@ public class VocabularyFragment extends BaseFragment implements VocabularyMvpVie
     @Inject
     VocabularyAdapter vocabularyAdapter;
 
-    @BindView(R.id.vocabularyRecyclerView)
-    RecyclerView vocabularyRecyclerView;
+    @BindView(R.id.vocabRecyclerView)
+    RecyclerView vocabRecyclerView;
+    @BindView(R.id.vocabMessageTextView)
+    TextView vocabMessageTextView;
+    @BindView(R.id.vocabProgressBar)
+    ProgressBar vocabProgressBar;
+
 
     public VocabularyFragment() {
         // Required empty public constructor
@@ -71,14 +82,45 @@ public class VocabularyFragment extends BaseFragment implements VocabularyMvpVie
         super.onDetach();
     }
 
+    /********
+     *  VocabularyMvpView implementation
+     *******/
+
+    @Override
+    public void showProgressBar(boolean show) {
+        if (show) {
+            vocabProgressBar.setVisibility(View.VISIBLE);
+            vocabRecyclerView.setVisibility(View.GONE);
+            vocabMessageTextView.setVisibility(View.GONE);
+        } else {
+            vocabProgressBar.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     public void showVocabulary(List<Vocabulary> vocabularyList) {
-        vocabularyRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        vocabularyRecyclerView.setAdapter(vocabularyAdapter);
-        vocabularyRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
+        vocabRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        vocabRecyclerView.setAdapter(vocabularyAdapter);
+        vocabRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
 
         vocabularyAdapter.setContext(getContext());
         vocabularyAdapter.setVocabularyList(vocabularyList);
         vocabularyAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showVocabularyEmpty() {
+        showMessage("No vocabulary to show.");
+    }
+
+    @Override
+    public void showError() {
+        showMessage("There was an error loading the vocabulary list.");
+    }
+
+    public void showMessage(String message) {
+        vocabRecyclerView.setVisibility(View.GONE);
+        vocabMessageTextView.setVisibility(View.VISIBLE);
+        vocabMessageTextView.setText(message);
     }
 }

@@ -1,11 +1,8 @@
 package com.mozawa.wanikaniandroid.ui.radicals;
 
 
-import android.util.Log;
-
 import com.mozawa.wanikaniandroid.data.DataManager;
 import com.mozawa.wanikaniandroid.data.model.Radical;
-import com.mozawa.wanikaniandroid.data.model.RadicalResponse;
 import com.mozawa.wanikaniandroid.ui.base.BasePresenter;
 import com.mozawa.wanikaniandroid.util.RxUtil;
 
@@ -48,23 +45,31 @@ public class RadicalsPresenter extends BasePresenter<RadicalsMvpView> {
     public void loadRadicals() {
         checkViewAttached();
         RxUtil.unsubscribe(radicalsSubscription);
+
+        getMvpView().showProgressBar(true);
+
         radicalsSubscription = dataManager.getRadicals()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<List<Radical>>() {
                     @Override
                     public void onCompleted() {
-
+                        getMvpView().showProgressBar(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(TAG, e.getLocalizedMessage());
+                        getMvpView().showProgressBar(false);
+                        getMvpView().showError();
                     }
 
                     @Override
                     public void onNext(List<Radical> radicalList) {
-                        getMvpView().showRadicals(radicalList);
+                        if (radicalList.size() > 0) {
+                            getMvpView().showRadicals(radicalList);
+                        } else {
+                            getMvpView().showRadicalsEmpty();
+                        }
                     }
                 });
     }

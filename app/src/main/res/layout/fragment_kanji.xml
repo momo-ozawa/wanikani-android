@@ -15,9 +15,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
         android:layout_marginTop="48dp"
-        android:text="No kanji to show... yet!"
         android:visibility="gone"
+        tools:text="Message"
         tools:visibility="visible"
         />
 

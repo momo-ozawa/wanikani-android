@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface RadicalsMvpView extends MvpView {
 
+    void showProgressBar(boolean show);
     void showRadicals(List<Radical> radicalList);
+    void showRadicalsEmpty();
+    void showError();
 
 }

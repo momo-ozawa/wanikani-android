@@ -1,8 +1,6 @@
 package com.mozawa.wanikaniandroid.ui.vocabulary;
 
 
-import android.util.Log;
-
 import com.mozawa.wanikaniandroid.data.DataManager;
 import com.mozawa.wanikaniandroid.data.model.Vocabulary;
 import com.mozawa.wanikaniandroid.ui.base.BasePresenter;
@@ -46,23 +44,31 @@ public class VocabularyPresenter extends BasePresenter<VocabularyMvpView> {
     public void loadVocabulary() {
         checkViewAttached();
         RxUtil.unsubscribe(vocabularySubscription);
+
+        getMvpView().showProgressBar(true);
+
         vocabularySubscription = dataManager.getVocabulary()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<List<Vocabulary>>() {
                     @Override
                     public void onCompleted() {
-
+                        getMvpView().showProgressBar(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(TAG, e.getLocalizedMessage());
+                        getMvpView().showProgressBar(false);
+                        getMvpView().showError();
                     }
 
                     @Override
                     public void onNext(List<Vocabulary> vocabularyList) {
-                        getMvpView().showVocabulary(vocabularyList);
+                        if (vocabularyList.size() > 0) {
+                            getMvpView().showVocabulary(vocabularyList);
+                        } else {
+                            getMvpView().showVocabularyEmpty();
+                        }
                     }
                 });
     }
