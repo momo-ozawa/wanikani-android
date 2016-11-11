@@ -8,12 +8,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.mozawa.wanikaniandroid.R;
 import com.mozawa.wanikaniandroid.data.model.Kanji;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseFragment;
-import com.mozawa.wanikaniandroid.ui.util.DividerItemDecoration;
+import com.mozawa.wanikaniandroid.ui.widgets.DividerItemDecoration;
+import com.mozawa.wanikaniandroid.util.ViewUtil;
 
 import java.util.List;
 
@@ -32,6 +35,10 @@ public class KanjiFragment extends BaseFragment implements KanjiMvpView {
 
     @BindView(R.id.kanjiRecyclerView)
     RecyclerView kanjiRecyclerView;
+    @BindView(R.id.kanjiMessageTextView)
+    TextView kanjiMessageTextView;
+    @BindView(R.id.kanjiProgressBar)
+    ProgressBar kanjiProgressBar;
 
     public KanjiFragment() {
         // Required empty public constructor
@@ -71,9 +78,28 @@ public class KanjiFragment extends BaseFragment implements KanjiMvpView {
         super.onDetach();
     }
 
+    /********
+     * KanjiMvpView implementation
+     *******/
+
+    @Override
+    public void showProgressBar(boolean show) {
+        if (show) {
+            kanjiProgressBar.setVisibility(View.VISIBLE);
+            kanjiRecyclerView.setVisibility(View.GONE);
+            kanjiMessageTextView.setVisibility(View.GONE);
+        } else {
+            kanjiProgressBar.setVisibility(View.GONE);
+        }
+    }
 
     @Override
     public void showKanji(List<Kanji> kanjiList) {
+        if (kanjiMessageTextView.getVisibility() == View.VISIBLE) {
+            ViewUtil.setVisible(kanjiMessageTextView, false);
+        }
+        kanjiRecyclerView.setVisibility(View.VISIBLE);
+
         kanjiRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         kanjiRecyclerView.setAdapter(kanjiAdapter);
         kanjiRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
@@ -81,5 +107,21 @@ public class KanjiFragment extends BaseFragment implements KanjiMvpView {
         kanjiAdapter.setContext(getContext());
         kanjiAdapter.setKanjiList(kanjiList);
         kanjiAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showKanjiEmpty() {
+        showMessage("No kanji to show... yet!");
+    }
+
+    @Override
+    public void showError() {
+        showMessage("There was an error loading the kanji");
+    }
+
+    public void showMessage(String message) {
+        kanjiRecyclerView.setVisibility(View.GONE);
+        kanjiMessageTextView.setVisibility(View.VISIBLE);
+        kanjiMessageTextView.setText(message);
     }
 }

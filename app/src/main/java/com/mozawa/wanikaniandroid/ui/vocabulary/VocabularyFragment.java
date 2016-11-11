@@ -13,7 +13,7 @@ import com.mozawa.wanikaniandroid.R;
 import com.mozawa.wanikaniandroid.data.model.Vocabulary;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseFragment;
-import com.mozawa.wanikaniandroid.ui.util.DividerItemDecoration;
+import com.mozawa.wanikaniandroid.ui.widgets.DividerItemDecoration;
 
 import java.util.List;
 

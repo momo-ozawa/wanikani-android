@@ -1,8 +1,6 @@
 package com.mozawa.wanikaniandroid.ui.kanji;
 
 
-import android.util.Log;
-
 import com.mozawa.wanikaniandroid.data.DataManager;
 import com.mozawa.wanikaniandroid.data.model.Kanji;
 import com.mozawa.wanikaniandroid.ui.base.BasePresenter;
@@ -36,7 +34,6 @@ public class KanjiPresenter extends BasePresenter<KanjiMvpView> {
 
     @Override
     public void detachView() {
-
         if (kanjiSubscription != null) {
             kanjiSubscription.unsubscribe();
         }
@@ -46,23 +43,31 @@ public class KanjiPresenter extends BasePresenter<KanjiMvpView> {
     public void loadKanji() {
         checkViewAttached();
         RxUtil.unsubscribe(kanjiSubscription);
+
+        getMvpView().showProgressBar(true);
+
         kanjiSubscription = dataManager.getKanji()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<List<Kanji>>() {
                     @Override
                     public void onCompleted() {
-
+                        getMvpView().showProgressBar(false);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(TAG, e.getLocalizedMessage());
+                        getMvpView().showProgressBar(false);
+                        getMvpView().showError();
                     }
 
                     @Override
                     public void onNext(List<Kanji> kanjiList) {
-                        getMvpView().showKanji(kanjiList);
+                        if (kanjiList.size() > 0) {
+                            getMvpView().showKanji(kanjiList);
+                        } else {
+                            getMvpView().showKanjiEmpty();
+                        }
                     }
                 });
     }

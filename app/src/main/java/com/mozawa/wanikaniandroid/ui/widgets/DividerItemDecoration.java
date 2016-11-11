@@ -1,4 +1,4 @@
-package com.mozawa.wanikaniandroid.ui.util;
+package com.mozawa.wanikaniandroid.ui.widgets;
 
 
 import android.content.Context;
