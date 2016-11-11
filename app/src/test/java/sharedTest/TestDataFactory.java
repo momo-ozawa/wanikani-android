@@ -2,6 +2,7 @@ package sharedTest;
 
 import com.mozawa.wanikaniandroid.data.model.Kanji;
 import com.mozawa.wanikaniandroid.data.model.Radical;
+import com.mozawa.wanikaniandroid.data.model.Vocabulary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,5 +31,13 @@ public class TestDataFactory {
             radicalList.add(new Radical());
         }
         return radicalList;
+    }
+
+    public static List<Vocabulary> makeVocabularyList(int number) {
+        List<Vocabulary> vocabularyList = new ArrayList<>();
+        for (int i = 0; i < number; i++) {
+            vocabularyList.add(new Vocabulary());
+        }
+        return vocabularyList;
     }
 }
