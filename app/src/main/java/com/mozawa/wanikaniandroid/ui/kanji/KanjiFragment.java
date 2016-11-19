@@ -2,6 +2,7 @@ package com.mozawa.wanikaniandroid.ui.kanji;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import com.mozawa.wanikaniandroid.R;
 import com.mozawa.wanikaniandroid.data.model.Kanji;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseFragment;
+import com.mozawa.wanikaniandroid.ui.kanjidetail.KanjiDetailActivity;
 import com.mozawa.wanikaniandroid.ui.widgets.DividerItemDecoration;
 
 import java.util.List;
@@ -24,7 +26,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class KanjiFragment extends BaseFragment implements KanjiMvpView {
+public class KanjiFragment extends BaseFragment implements KanjiMvpView,
+        KanjiAdapter.KanjiClickedListener {
 
     @Inject
     KanjiPresenter presenter;
@@ -105,6 +108,7 @@ public class KanjiFragment extends BaseFragment implements KanjiMvpView {
 
         kanjiAdapter.setContext(getContext());
         kanjiAdapter.setKanjiList(kanjiList);
+        kanjiAdapter.setKanjiClickedListener(this);
         kanjiAdapter.notifyDataSetChanged();
     }
 
@@ -122,5 +126,15 @@ public class KanjiFragment extends BaseFragment implements KanjiMvpView {
         kanjiRecyclerView.setVisibility(View.GONE);
         kanjiMessageTextView.setVisibility(View.VISIBLE);
         kanjiMessageTextView.setText(message);
+    }
+
+    /********
+     * KanjiAdapter.KanjiClickedListener implementation
+     *******/
+
+    @Override
+    public void onKanjiClicked(Kanji kanji) {
+        Intent intent = new Intent(getActivity(), KanjiDetailActivity.class);
+        startActivity(intent);
     }
 }

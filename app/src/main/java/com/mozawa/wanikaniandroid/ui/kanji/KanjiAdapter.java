@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mozawa.wanikaniandroid.R;
@@ -23,6 +24,7 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
 
     private Context context;
     private List<Kanji> kanjiList;
+    private KanjiClickedListener kanjiClickedListener;
 
     @Inject
     public KanjiAdapter() {
@@ -37,6 +39,10 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
         this.kanjiList = kanjiList;
     }
 
+    public void setKanjiClickedListener(KanjiClickedListener kanjiClickedListener) {
+        this.kanjiClickedListener = kanjiClickedListener;
+    }
+
     @Override
     public KanjiViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
@@ -46,11 +52,19 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
 
     @Override
     public void onBindViewHolder(KanjiViewHolder holder, int position) {
-        Kanji kanji = kanjiList.get(position);
+        final Kanji kanji = kanjiList.get(position);
 
         holder.characterTextView.setText(kanji.character);
         holder.onyomiTextView.setText(kanji.onyomi);
         holder.meaningTextView.setText(kanji.meaning);
+
+        // On click
+        holder.kanjiLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                kanjiClickedListener.onKanjiClicked(kanji);
+            }
+        });
     }
 
     @Override
@@ -60,6 +74,8 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
 
     public class KanjiViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.kanjiLayout)
+        LinearLayout kanjiLayout;
         @BindView(R.id.characterTextView)
         TextView characterTextView;
         @BindView(R.id.onyomiTextView)
@@ -71,6 +87,11 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public interface KanjiClickedListener {
+
+        void onKanjiClicked(Kanji kanji);
 
     }
 }
