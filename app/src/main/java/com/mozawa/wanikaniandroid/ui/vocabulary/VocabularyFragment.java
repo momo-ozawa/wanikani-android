@@ -24,10 +24,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.mozawa.wanikaniandroid.R.id.kanjiMessageTextView;
-import static com.mozawa.wanikaniandroid.R.id.kanjiProgressBar;
-import static com.mozawa.wanikaniandroid.R.id.kanjiRecyclerView;
-
 public class VocabularyFragment extends BaseFragment implements VocabularyMvpView {
 
     @Inject
@@ -99,6 +95,11 @@ public class VocabularyFragment extends BaseFragment implements VocabularyMvpVie
 
     @Override
     public void showVocabulary(List<Vocabulary> vocabularyList) {
+        if (vocabMessageTextView.getVisibility() == View.VISIBLE) {
+            vocabMessageTextView.setVisibility(View.GONE);
+        }
+        vocabRecyclerView.setVisibility(View.VISIBLE);
+
         vocabRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         vocabRecyclerView.setAdapter(vocabularyAdapter);
         vocabRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));

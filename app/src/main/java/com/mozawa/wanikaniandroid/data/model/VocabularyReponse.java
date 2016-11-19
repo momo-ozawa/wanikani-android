@@ -37,6 +37,13 @@ public class VocabularyReponse {
     @SerializedName("user_information")
     public UserInformation userInformation;
     @SerializedName("requested_information")
-    public List<Vocabulary> vocabularyList;
+    public RequestedInfo requestedInformation;
+
+    public static class RequestedInfo {
+
+        @SerializedName("general")
+        public List<Vocabulary> vocabularyList;
+
+    }
 
 }

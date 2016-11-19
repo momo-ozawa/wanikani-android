@@ -76,7 +76,7 @@ public class DataManager {
                 .flatMap(new Func1<VocabularyReponse, Observable<List<Vocabulary>>>() {
                     @Override
                     public Observable<List<Vocabulary>> call(VocabularyReponse response) {
-                        return Observable.just(response.vocabularyList);
+                        return Observable.just(response.requestedInformation.vocabularyList);
                     }
                 });
     }
