@@ -16,7 +16,6 @@ import com.mozawa.wanikaniandroid.data.model.Kanji;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseFragment;
 import com.mozawa.wanikaniandroid.ui.widgets.DividerItemDecoration;
-import com.mozawa.wanikaniandroid.util.ViewUtil;
 
 import java.util.List;
 
@@ -96,7 +95,7 @@ public class KanjiFragment extends BaseFragment implements KanjiMvpView {
     @Override
     public void showKanji(List<Kanji> kanjiList) {
         if (kanjiMessageTextView.getVisibility() == View.VISIBLE) {
-            ViewUtil.setVisible(kanjiMessageTextView, false);
+            kanjiMessageTextView.setVisibility(View.GONE);
         }
         kanjiRecyclerView.setVisibility(View.VISIBLE);
 

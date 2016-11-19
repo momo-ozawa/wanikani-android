@@ -3,14 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnWidth="120dp"
     android:padding="2dp">
 
     <com.mozawa.wanikaniandroid.ui.widgets.AutofitRecyclerView
         android:id="@+id/radicalsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnWidth="120dp"
+        android:columnWidth="100dp"
         android:padding="2dp"
         />
 

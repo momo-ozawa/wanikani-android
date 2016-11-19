@@ -21,9 +21,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.mozawa.wanikaniandroid.R.id.kanjiMessageTextView;
-import static com.mozawa.wanikaniandroid.R.id.kanjiRecyclerView;
-
 public class RadicalsFragment extends BaseFragment implements RadicalsMvpView {
 
     @Inject
@@ -94,6 +91,11 @@ public class RadicalsFragment extends BaseFragment implements RadicalsMvpView {
 
     @Override
     public void showRadicals(List<Radical> radicalList) {
+        if (radicalsMessageTextView.getVisibility() == View.VISIBLE) {
+            radicalsMessageTextView.setVisibility(View.GONE);
+        }
+        radicalsRecyclerView.setVisibility(View.VISIBLE);
+
         radicalsRecyclerView.setHasFixedSize(true);
         radicalsRecyclerView.setAdapter(radicalsAdapter);
 
