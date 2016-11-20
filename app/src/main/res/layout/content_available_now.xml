@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    tools:showIn="@layout/card_available_now">
+
+    <TextView
+        android:id="@+id/availableNowTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Available Now"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <com.mozawa.wanikaniandroid.ui.widgets.CircleTextView
+        android:id="@+id/lessonsCircleTextView"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        app:labelText="Lessons"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/availableNowTextView"/>
+
+    <Button
+        android:id="@+id/lessonsButton"
+        style="@style/FlatButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Session"
+        app:layout_constraintBottom_toBottomOf="@+id/lessonsCircleTextView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toRightOf="@+id/lessonsCircleTextView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/lessonsCircleTextView"/>
+
+    <com.mozawa.wanikaniandroid.ui.widgets.CircleTextView
+        android:id="@+id/reviewsCircleTextView"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="12dp"
+        app:labelText="Reviews"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lessonsCircleTextView"/>
+
+    <Button
+        android:id="@+id/reviewsButton"
+        style="@style/FlatButtonText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start Session"
+        app:layout_constraintBottom_toBottomOf="@+id/reviewsCircleTextView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toRightOf="@+id/reviewsCircleTextView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/reviewsCircleTextView"
+        />
+
+</android.support.constraint.ConstraintLayout>
