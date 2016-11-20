@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mozawa.wanikaniandroid.R;
@@ -59,7 +58,7 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
         holder.meaningTextView.setText(kanji.meaning);
 
         // On click
-        holder.kanjiLayout.setOnClickListener(new View.OnClickListener() {
+        holder.kanjiView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 kanjiClickedListener.onKanjiClicked(kanji);
@@ -74,8 +73,8 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
 
     public class KanjiViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.kanjiLayout)
-        LinearLayout kanjiLayout;
+        @BindView(R.id.kanjiView)
+        View kanjiView;
         @BindView(R.id.characterTextView)
         TextView characterTextView;
         @BindView(R.id.onyomiTextView)
