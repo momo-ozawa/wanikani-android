@@ -29,7 +29,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.main.MainActivity"/>
         </activity>
-        <activity android:name=".ui.kanjidetail.KanjiDetailActivity">
+        <activity
+            android:name=".ui.kanjidetail.KanjiDetailActivity"
+            android:label="@string/title_activity_kanji_detail"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 
