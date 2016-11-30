@@ -3,9 +3,12 @@ package com.mozawa.wanikaniandroid.ui.kanji;
 
 import com.mozawa.wanikaniandroid.data.DataManager;
 import com.mozawa.wanikaniandroid.data.model.Kanji;
+import com.mozawa.wanikaniandroid.data.model.ListHeader;
+import com.mozawa.wanikaniandroid.data.model.ListItem;
 import com.mozawa.wanikaniandroid.ui.base.BasePresenter;
 import com.mozawa.wanikaniandroid.util.RxUtil;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -52,7 +55,7 @@ public class KanjiPresenter extends BasePresenter<KanjiMvpView> {
         kanjiSubscription = getKanjiGroupedByLevel()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Subscriber<List<List<Kanji>>>() {
+                .subscribe(new Subscriber<List<ListItem>>() {
                     @Override
                     public void onCompleted() {
                         getMvpView().showProgressBar(false);
@@ -65,9 +68,9 @@ public class KanjiPresenter extends BasePresenter<KanjiMvpView> {
                     }
 
                     @Override
-                    public void onNext(List<List<Kanji>> kanjiGroupedByLevel) {
-                        if (kanjiGroupedByLevel.size() > 0) {
-                            getMvpView().showKanji(kanjiGroupedByLevel.get(0));
+                    public void onNext(List<ListItem> listItems) {
+                        if (listItems.size() > 0) {
+                            getMvpView().showListItems(listItems);
                         } else {
                             getMvpView().showKanjiEmpty();
                         }
@@ -75,8 +78,7 @@ public class KanjiPresenter extends BasePresenter<KanjiMvpView> {
                 });
     }
 
-
-    private Observable<List<List<Kanji>>> getKanjiGroupedByLevel() {
+    private Observable<List<ListItem>> getKanjiGroupedByLevel() {
         return dataManager.getKanji()
                 .flatMap(new Func1<List<Kanji>, Observable<Kanji>>() {
                     @Override
@@ -90,12 +92,31 @@ public class KanjiPresenter extends BasePresenter<KanjiMvpView> {
                         return kanji.level;
                     }
                 })
-                .flatMap(new Func1<GroupedObservable<Integer, Kanji>, Observable<List<Kanji>>>() {
+                .flatMap(new Func1<GroupedObservable<Integer, Kanji>, Observable<List<ListItem>>>() {
                     @Override
-                    public Observable<List<Kanji>> call(GroupedObservable<Integer, Kanji> groupedObservable) {
-                        return groupedObservable.toList();
+                    public Observable<List<ListItem>> call(final GroupedObservable<Integer, Kanji> groupedObservable) {
+                        return getLevelList(groupedObservable);
+                    }
+                })
+                .flatMap(new Func1<List<ListItem>, Observable<ListItem>>() {
+                    @Override
+                    public Observable<ListItem> call(List<ListItem> listItems) {
+                        return Observable.from(listItems);
                     }
                 })
                 .toList();
+    }
+
+    private Observable<List<ListItem>> getLevelList(final GroupedObservable<Integer, Kanji> groupedObservable) {
+        return groupedObservable.toList()
+                .map(new Func1<List<Kanji>, List<ListItem>>() {
+                    @Override
+                    public List<ListItem> call(List<Kanji> kanjiList) {
+                        List<ListItem> list = new LinkedList<>();
+                        list.add(new ListHeader("level " + groupedObservable.getKey()));
+                        list.addAll(kanjiList);
+                        return list;
+                    }
+                });
     }
 }
