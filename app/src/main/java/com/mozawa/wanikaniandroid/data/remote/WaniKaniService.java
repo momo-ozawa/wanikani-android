@@ -17,7 +17,8 @@ import rx.Observable;
 public interface WaniKaniService {
 
     String BASE_URL = "https://www.wanikani.com/api/user/";
-    String API_KEY = "6984123dc766bdf49edfe44dfa653c6d/";
+    String API_KEY = "f33a8ea625b295955d96c12d4ed3fd7c/";
+    // String API_KEY = "6984123dc766bdf49edfe44dfa653c6d/";
 
     @GET("study-queue")
     Observable<StudyQueueResponse> getStudyQueue();
