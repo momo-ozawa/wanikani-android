@@ -76,4 +76,13 @@
         tools:text="word"
         />
 
+    <TextView
+        android:id="@+id/levelTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/verticalGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/meaningTextView"
+        tools:text="level"
+        />
+
 </android.support.constraint.ConstraintLayout>

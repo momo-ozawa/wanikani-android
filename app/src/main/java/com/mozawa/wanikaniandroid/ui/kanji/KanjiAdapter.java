@@ -56,6 +56,7 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
         holder.characterTextView.setText(kanji.character);
         holder.onyomiTextView.setText(kanji.onyomi);
         holder.meaningTextView.setText(kanji.meaning);
+        holder.levelTextView.setText("Level " + kanji.level);
 
         // On click
         holder.kanjiView.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +82,8 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
         TextView onyomiTextView;
         @BindView(R.id.meaningTextView)
         TextView meaningTextView;
+        @BindView(R.id.levelTextView)
+        TextView levelTextView;
 
         public KanjiViewHolder(View itemView) {
             super(itemView);
