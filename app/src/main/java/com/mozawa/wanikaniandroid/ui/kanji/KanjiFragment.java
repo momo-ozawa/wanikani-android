@@ -108,31 +108,13 @@ public class KanjiFragment extends BaseFragment implements KanjiMvpView,
         kanjiRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
 
         kanjiAdapter.setContext(getContext());
-//        kanjiAdapter.setKanjiList(kanjiList);
         kanjiAdapter.setListItems(listItems);
         kanjiAdapter.setKanjiClickedListener(this);
         kanjiAdapter.notifyDataSetChanged();
     }
 
-//    @Override
-//    public void showKanji(List<Kanji> kanjiList) {
-//        if (kanjiMessageTextView.getVisibility() == View.VISIBLE) {
-//            kanjiMessageTextView.setVisibility(View.GONE);
-//        }
-//        kanjiRecyclerView.setVisibility(View.VISIBLE);
-//
-//        kanjiRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        kanjiRecyclerView.setAdapter(kanjiAdapter);
-//        kanjiRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
-//
-//        kanjiAdapter.setContext(getContext());
-//        kanjiAdapter.setKanjiList(kanjiList);
-//        kanjiAdapter.setKanjiClickedListener(this);
-//        kanjiAdapter.notifyDataSetChanged();
-//    }
-
     @Override
-    public void showKanjiEmpty() {
+    public void showListItemsEmpty() {
         showMessage("No kanji to show.");
     }
 

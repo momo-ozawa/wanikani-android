@@ -8,10 +8,9 @@ import java.util.List;
 
 public interface KanjiMvpView extends MvpView {
 
-//    void showKanji(List<Kanji> kanjiList);
-    void showKanjiEmpty();
-    void showError();
     void showProgressBar(boolean show);
-
     void showListItems(List<ListItem> listItems);
+    void showListItemsEmpty();
+    void showError();
+
 }

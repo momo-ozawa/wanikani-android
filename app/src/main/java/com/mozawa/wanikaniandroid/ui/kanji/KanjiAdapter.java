@@ -21,7 +21,7 @@ import javax.inject.Inject;
 public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHolder> {
 
     public static final int HEADER_VIEW_TYPE = 0;
-    public static final int KANJI_VIEW_TYPE = 1;
+    public static final int ITEM_VIEW_TYPE = 1;
 
     private Context context;
     private List<ListItem> listItems;
@@ -44,6 +44,10 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
         this.kanjiClickedListener = kanjiClickedListener;
     }
 
+    public boolean isHeader(int position) {
+        return getItemViewType(position) == HEADER_VIEW_TYPE;
+    }
+
     @Override
     public KanjiViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
@@ -52,7 +56,7 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
         if (viewType == HEADER_VIEW_TYPE) {
             itemView = layoutInflater.inflate(R.layout.item_header, parent, false);
             return new KanjiViewHolder(itemView, viewType);
-        } else if (viewType == KANJI_VIEW_TYPE) {
+        } else if (viewType == ITEM_VIEW_TYPE) {
             itemView = layoutInflater.inflate(R.layout.item_kanji, parent, false);
             return new KanjiViewHolder(itemView, viewType);
         }
@@ -94,14 +98,8 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
 
     @Override
     public int getItemViewType(int position) {
-        ListItem listItem = listItems.get(position);
-        switch (listItem.getType()) {
-            case ListHeader.TYPE:
-                return 0;
-            case Kanji.TYPE:
-                return 1;
-        }
-        return -1;
+        String type = listItems.get(position).getType();
+        return (type == ListHeader.TYPE) ? HEADER_VIEW_TYPE : ITEM_VIEW_TYPE;
     }
 
     public class KanjiViewHolder extends RecyclerView.ViewHolder {
@@ -119,7 +117,7 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
             super(itemView);
             if (itemViewType == HEADER_VIEW_TYPE) {
                 levelTextView = (TextView) itemView.findViewById(R.id.levelTextView);
-            } else if (itemViewType == KANJI_VIEW_TYPE) {
+            } else if (itemViewType == ITEM_VIEW_TYPE) {
                 kanjiView = itemView.findViewById(R.id.kanjiView);
                 characterTextView = (TextView) itemView.findViewById(R.id.characterTextView);
                 onyomiTextView = (TextView) itemView.findViewById(R.id.onyomiTextView);

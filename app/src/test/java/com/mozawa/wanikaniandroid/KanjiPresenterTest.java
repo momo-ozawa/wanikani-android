@@ -63,7 +63,7 @@ public class KanjiPresenterTest {
         verify(mockKanjiMvpView, times(1)).showProgressBar(true);
         verify(mockKanjiMvpView, times(1)).showProgressBar(false);
         verify(mockKanjiMvpView, never()).showError();
-        verify(mockKanjiMvpView, never()).showKanjiEmpty();
+        verify(mockKanjiMvpView, never()).showListItemsEmpty();
     }
 
     @Test
@@ -72,7 +72,7 @@ public class KanjiPresenterTest {
                 .thenReturn(Observable.just(Collections.<Kanji>emptyList()));
 
         kanjiPresenter.loadKanji();
-        verify(mockKanjiMvpView, times(1)).showKanjiEmpty();
+        verify(mockKanjiMvpView, times(1)).showListItemsEmpty();
         verify(mockKanjiMvpView, times(1)).showProgressBar(true);
         verify(mockKanjiMvpView, times(1)).showProgressBar(false);
         verify(mockKanjiMvpView, never()).showKanji(anyListOf(Kanji.class));
@@ -88,7 +88,7 @@ public class KanjiPresenterTest {
         verify(mockKanjiMvpView, times(1)).showError();
         verify(mockKanjiMvpView, times(1)).showProgressBar(true);
         verify(mockKanjiMvpView, times(1)).showProgressBar(false);
-        verify(mockKanjiMvpView, never()).showKanjiEmpty();
+        verify(mockKanjiMvpView, never()).showListItemsEmpty();
         verify(mockKanjiMvpView, never()).showKanji(anyListOf(Kanji.class));
     }
 }

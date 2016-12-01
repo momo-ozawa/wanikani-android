@@ -72,7 +72,7 @@ public class KanjiPresenter extends BasePresenter<KanjiMvpView> {
                         if (listItems.size() > 0) {
                             getMvpView().showListItems(listItems);
                         } else {
-                            getMvpView().showKanjiEmpty();
+                            getMvpView().showListItemsEmpty();
                         }
                     }
                 });
