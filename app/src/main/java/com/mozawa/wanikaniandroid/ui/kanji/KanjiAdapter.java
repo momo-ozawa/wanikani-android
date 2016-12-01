@@ -50,7 +50,7 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
         View itemView;
 
         if (viewType == HEADER_VIEW_TYPE) {
-            itemView = layoutInflater.inflate(R.layout.item_kanji_header, parent, false);
+            itemView = layoutInflater.inflate(R.layout.item_header, parent, false);
             return new KanjiViewHolder(itemView, viewType);
         } else if (viewType == KANJI_VIEW_TYPE) {
             itemView = layoutInflater.inflate(R.layout.item_kanji, parent, false);
@@ -119,7 +119,7 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
             super(itemView);
             if (itemViewType == HEADER_VIEW_TYPE) {
                 levelTextView = (TextView) itemView.findViewById(R.id.levelTextView);
-            } else {
+            } else if (itemViewType == KANJI_VIEW_TYPE) {
                 kanjiView = itemView.findViewById(R.id.kanjiView);
                 characterTextView = (TextView) itemView.findViewById(R.id.characterTextView);
                 onyomiTextView = (TextView) itemView.findViewById(R.id.onyomiTextView);

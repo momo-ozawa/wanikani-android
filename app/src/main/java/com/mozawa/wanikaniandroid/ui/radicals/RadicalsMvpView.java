@@ -1,7 +1,7 @@
 package com.mozawa.wanikaniandroid.ui.radicals;
 
 
-import com.mozawa.wanikaniandroid.data.model.Radical;
+import com.mozawa.wanikaniandroid.data.model.ListItem;
 import com.mozawa.wanikaniandroid.ui.base.MvpView;
 
 import java.util.List;
@@ -9,8 +9,8 @@ import java.util.List;
 public interface RadicalsMvpView extends MvpView {
 
     void showProgressBar(boolean show);
-    void showRadicals(List<Radical> radicalList);
-    void showRadicalsEmpty();
+    void showListItems(List<ListItem> listItems);
+    void showListItemsEmpty();
     void showError();
 
 }
