@@ -2,6 +2,7 @@ package com.mozawa.wanikaniandroid.ui.radicals;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.mozawa.wanikaniandroid.R;
-import com.mozawa.wanikaniandroid.data.model.Radical;
+import com.mozawa.wanikaniandroid.data.model.ListItem;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseFragment;
 import com.mozawa.wanikaniandroid.ui.widgets.AutofitRecyclerView;
@@ -90,22 +91,29 @@ public class RadicalsFragment extends BaseFragment implements RadicalsMvpView {
     }
 
     @Override
-    public void showRadicals(List<Radical> radicalList) {
+    public void showListItems(List<ListItem> listItems) {
         if (radicalsMessageTextView.getVisibility() == View.VISIBLE) {
             radicalsMessageTextView.setVisibility(View.GONE);
         }
         radicalsRecyclerView.setVisibility(View.VISIBLE);
 
         radicalsRecyclerView.setHasFixedSize(true);
+        final GridLayoutManager manager = (GridLayoutManager) radicalsRecyclerView.getLayoutManager();
+        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return radicalsAdapter.isHeader(position) ? manager.getSpanCount() : 1;
+            }
+        });
         radicalsRecyclerView.setAdapter(radicalsAdapter);
 
         radicalsAdapter.setContext(getContext());
-        radicalsAdapter.setRadicalList(radicalList);
+        radicalsAdapter.setListItems(listItems);
         radicalsAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void showRadicalsEmpty() {
+    public void showListItemsEmpty() {
         showMessage("No radicals to show.");
     }
 

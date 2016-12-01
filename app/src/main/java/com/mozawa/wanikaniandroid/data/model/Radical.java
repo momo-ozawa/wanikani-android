@@ -2,7 +2,9 @@ package com.mozawa.wanikaniandroid.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Radical {
+public class Radical implements ListItem {
+
+    public static final String TYPE = "radical";
 
     public String character;
     public String meaning;
@@ -15,4 +17,8 @@ public class Radical {
         return character != null;
     }
 
+    @Override
+    public String getType() {
+        return TYPE;
+    }
 }

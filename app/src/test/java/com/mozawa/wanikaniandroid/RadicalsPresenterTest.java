@@ -62,7 +62,7 @@ public class RadicalsPresenterTest {
         verify(mockRadicalsMvpView, times(1)).showProgressBar(true);
         verify(mockRadicalsMvpView, times(1)).showProgressBar(false);
         verify(mockRadicalsMvpView, never()).showError();
-        verify(mockRadicalsMvpView, never()).showRadicalsEmpty();
+        verify(mockRadicalsMvpView, never()).showListItemsEmpty();
     }
 
     @Test
@@ -71,7 +71,7 @@ public class RadicalsPresenterTest {
                 .thenReturn(Observable.just(Collections.<Radical>emptyList()));
 
         radicalsPresenter.loadRadicals();
-        verify(mockRadicalsMvpView, times(1)).showRadicalsEmpty();
+        verify(mockRadicalsMvpView, times(1)).showListItemsEmpty();
         verify(mockRadicalsMvpView, times(1)).showProgressBar(true);
         verify(mockRadicalsMvpView, times(1)).showProgressBar(false);
         verify(mockRadicalsMvpView, never()).showRadicals(anyListOf(Radical.class));
@@ -87,7 +87,7 @@ public class RadicalsPresenterTest {
         verify(mockRadicalsMvpView, times(1)).showError();
         verify(mockRadicalsMvpView, times(1)).showProgressBar(true);
         verify(mockRadicalsMvpView, times(1)).showProgressBar(false);
-        verify(mockRadicalsMvpView, never()).showRadicalsEmpty();
+        verify(mockRadicalsMvpView, never()).showListItemsEmpty();
         verify(mockRadicalsMvpView, never()).showRadicals(anyListOf(Radical.class));
     }
 
