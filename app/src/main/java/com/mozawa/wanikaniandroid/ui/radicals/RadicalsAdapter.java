@@ -73,46 +73,50 @@ public class RadicalsAdapter extends RecyclerView.Adapter<RadicalsAdapter.Radica
                 break;
             case Radical.TYPE:
                 final Radical radical = (Radical) item;
-
-                if (radical.characterExists()) {
-                    holder.characterTextView.setText(radical.character);
-                    holder.characterTextView.setVisibility(View.VISIBLE);
-                    holder.characterImageView.setVisibility(View.GONE);
-                } else {
-                    Picasso.with(context).load(radical.image).into(holder.characterImageView);
-                    holder.characterImageView.setColorFilter(ContextCompat.getColor(context, android.R.color.tertiary_text_light));
-                    holder.characterImageView.setVisibility(View.VISIBLE);
-                    holder.characterTextView.setVisibility(View.GONE);
-                }
-
+                setCharacter(holder, radical);
+                setSrsColor(holder, radical);
                 holder.meaningTextView.setText(radical.meaning);
                 break;
         }
 
+    }
 
-//        int color = -1;
-//        switch (radical.userSpecific.srs) {
-//            case "apprentice":
-//                color = R.color.apprentice;
-//                break;
-//            case "guru":
-//                color = R.color.guru;
-//                break;
-//            case "master":
-//                color = R.color.master;
-//                break;
-//            case "enlightened":
-//                color = R.color.enlightened;
-//                break;
-//            case "burned":
-//                color = R.color.burned;
-//                break;
-//        }
-//
-//        if (color != -1) {
-//            holder.srsLevelView.setBackgroundColor(ContextCompat.getColor(context, color));
-//        }
+    private void setCharacter(RadicalsViewHolder holder, Radical radical) {
+        if (radical.characterExists()) {
+            holder.characterTextView.setText(radical.character);
+            holder.characterTextView.setVisibility(View.VISIBLE);
+            holder.characterImageView.setVisibility(View.GONE);
+        } else {
+            Picasso.with(context).load(radical.image).into(holder.characterImageView);
+            holder.characterImageView.setColorFilter(ContextCompat.getColor(context, android.R.color.tertiary_text_light));
+            holder.characterImageView.setVisibility(View.VISIBLE);
+            holder.characterTextView.setVisibility(View.GONE);
+        }
+    }
 
+    private void setSrsColor(RadicalsViewHolder holder, Radical radical) {
+        int color = -1;
+        switch (radical.userSpecific.srs) {
+            case "apprentice":
+                color = R.color.apprentice;
+                break;
+            case "guru":
+                color = R.color.guru;
+                break;
+            case "master":
+                color = R.color.master;
+                break;
+            case "enlighten":
+                color = R.color.enlighten;
+                break;
+            case "burned":
+                color = R.color.burned;
+                break;
+        }
+
+        if (color != -1) {
+            holder.srsLevelView.setBackgroundColor(ContextCompat.getColor(context, color));
+        }
     }
 
     @Override

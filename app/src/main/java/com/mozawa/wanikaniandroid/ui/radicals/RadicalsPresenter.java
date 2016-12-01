@@ -18,6 +18,7 @@ import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
+import rx.functions.Func2;
 import rx.observables.GroupedObservable;
 import rx.schedulers.Schedulers;
 
@@ -97,7 +98,7 @@ public class RadicalsPresenter extends BasePresenter<RadicalsMvpView> {
                 .flatMap(new Func1<GroupedObservable<Integer, Radical>, Observable<List<ListItem>>>() {
                     @Override
                     public Observable<List<ListItem>> call(final GroupedObservable<Integer, Radical> groupedObservable) {
-                        return getLevelList(groupedObservable);
+                        return getSortedLevelList(groupedObservable);
                     }
                 })
                 .flatMap(new Func1<List<ListItem>, Observable<ListItem>>() {
@@ -109,8 +110,14 @@ public class RadicalsPresenter extends BasePresenter<RadicalsMvpView> {
                 .toList();
     }
 
-    private Observable<List<ListItem>> getLevelList(final GroupedObservable<Integer, Radical> groupedObservable) {
-        return groupedObservable.toList()
+    private Observable<List<ListItem>> getSortedLevelList(final GroupedObservable<Integer, Radical> groupedObservable) {
+        return groupedObservable
+                .toSortedList(new Func2<Radical, Radical, Integer>() {
+                    @Override
+                    public Integer call(Radical radical, Radical another) {
+                        return radical.userSpecific.srsNumeric - another.userSpecific.srsNumeric;
+                    }
+                })
                 .map(new Func1<List<Radical>, List<ListItem>>() {
                     @Override
                     public List<ListItem> call(List<Radical> radicalList) {

@@ -8,8 +8,8 @@
 
     <!--SRS colors-->
     <color name="apprentice">#FF4081</color>
-    <color name="guru">#A135BB</color>
-    <color name="master">#3557DD</color>
-    <color name="enlightened">#009BE9</color>
-    <color name="burned">#37474F</color>
+    <color name="guru">#8E24AA</color>
+    <color name="master">#0D47A1</color>
+    <color name="enlighten">#03A9F4</color>
+    <color name="burned">#263238</color>
 </resources>
