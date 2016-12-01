@@ -3,6 +3,7 @@ package com.mozawa.wanikaniandroid;
 
 import com.mozawa.wanikaniandroid.data.DataManager;
 import com.mozawa.wanikaniandroid.data.model.Kanji;
+import com.mozawa.wanikaniandroid.data.model.ListItem;
 import com.mozawa.wanikaniandroid.ui.kanji.KanjiMvpView;
 import com.mozawa.wanikaniandroid.ui.kanji.KanjiPresenter;
 import com.mozawa.wanikaniandroid.util.RxSchedulersOverrideRule;
@@ -59,7 +60,7 @@ public class KanjiPresenterTest {
                 .thenReturn(Observable.just(kanjiList));
 
         kanjiPresenter.loadKanji();
-        verify(mockKanjiMvpView, times(1)).showKanji(kanjiList);
+        verify(mockKanjiMvpView, times(1)).showListItems(anyListOf(ListItem.class));
         verify(mockKanjiMvpView, times(1)).showProgressBar(true);
         verify(mockKanjiMvpView, times(1)).showProgressBar(false);
         verify(mockKanjiMvpView, never()).showError();
@@ -75,7 +76,7 @@ public class KanjiPresenterTest {
         verify(mockKanjiMvpView, times(1)).showListItemsEmpty();
         verify(mockKanjiMvpView, times(1)).showProgressBar(true);
         verify(mockKanjiMvpView, times(1)).showProgressBar(false);
-        verify(mockKanjiMvpView, never()).showKanji(anyListOf(Kanji.class));
+        verify(mockKanjiMvpView, never()).showListItems(anyListOf(ListItem.class));
         verify(mockKanjiMvpView, never()).showError();
     }
 
@@ -89,6 +90,6 @@ public class KanjiPresenterTest {
         verify(mockKanjiMvpView, times(1)).showProgressBar(true);
         verify(mockKanjiMvpView, times(1)).showProgressBar(false);
         verify(mockKanjiMvpView, never()).showListItemsEmpty();
-        verify(mockKanjiMvpView, never()).showKanji(anyListOf(Kanji.class));
+        verify(mockKanjiMvpView, never()).showListItems(anyListOf(ListItem.class));
     }
 }

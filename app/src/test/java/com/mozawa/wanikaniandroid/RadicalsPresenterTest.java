@@ -1,6 +1,7 @@
 package com.mozawa.wanikaniandroid;
 
 import com.mozawa.wanikaniandroid.data.DataManager;
+import com.mozawa.wanikaniandroid.data.model.ListItem;
 import com.mozawa.wanikaniandroid.data.model.Radical;
 import com.mozawa.wanikaniandroid.ui.radicals.RadicalsMvpView;
 import com.mozawa.wanikaniandroid.ui.radicals.RadicalsPresenter;
@@ -58,7 +59,7 @@ public class RadicalsPresenterTest {
                 .thenReturn(Observable.just(radicalList));
 
         radicalsPresenter.loadRadicals();
-        verify(mockRadicalsMvpView, times(1)).showRadicals(radicalList);
+        verify(mockRadicalsMvpView, times(1)).showListItems(anyListOf(ListItem.class));
         verify(mockRadicalsMvpView, times(1)).showProgressBar(true);
         verify(mockRadicalsMvpView, times(1)).showProgressBar(false);
         verify(mockRadicalsMvpView, never()).showError();
@@ -74,7 +75,7 @@ public class RadicalsPresenterTest {
         verify(mockRadicalsMvpView, times(1)).showListItemsEmpty();
         verify(mockRadicalsMvpView, times(1)).showProgressBar(true);
         verify(mockRadicalsMvpView, times(1)).showProgressBar(false);
-        verify(mockRadicalsMvpView, never()).showRadicals(anyListOf(Radical.class));
+        verify(mockRadicalsMvpView, never()).showListItems(anyListOf(ListItem.class));
         verify(mockRadicalsMvpView, never()).showError();
     }
 
@@ -88,7 +89,7 @@ public class RadicalsPresenterTest {
         verify(mockRadicalsMvpView, times(1)).showProgressBar(true);
         verify(mockRadicalsMvpView, times(1)).showProgressBar(false);
         verify(mockRadicalsMvpView, never()).showListItemsEmpty();
-        verify(mockRadicalsMvpView, never()).showRadicals(anyListOf(Radical.class));
+        verify(mockRadicalsMvpView, never()).showListItems(anyListOf(ListItem.class));
     }
 
 }

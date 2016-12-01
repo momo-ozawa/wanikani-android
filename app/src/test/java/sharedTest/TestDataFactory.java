@@ -1,6 +1,7 @@
 package sharedTest;
 
 import com.mozawa.wanikaniandroid.data.model.Kanji;
+import com.mozawa.wanikaniandroid.data.model.ListItem;
 import com.mozawa.wanikaniandroid.data.model.Radical;
 import com.mozawa.wanikaniandroid.data.model.Vocabulary;
 
@@ -8,6 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestDataFactory {
+
+    public static List<ListItem> makeListItemList(int number) {
+        List<ListItem> listItems = new ArrayList<>();
+        listItems.addAll(makeKanjiList(number));
+        return listItems;
+    }
 
     public static List<Kanji> makeKanjiList(int number) {
         List<Kanji> kanjiList = new ArrayList<>();
