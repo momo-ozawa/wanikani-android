@@ -18,7 +18,6 @@ import com.mozawa.wanikaniandroid.data.model.ListItem;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseFragment;
 import com.mozawa.wanikaniandroid.ui.kanjidetail.KanjiDetailActivity;
-import com.mozawa.wanikaniandroid.ui.widgets.DividerItemDecoration;
 
 import java.util.List;
 
@@ -105,7 +104,6 @@ public class KanjiFragment extends BaseFragment implements KanjiMvpView,
 
         kanjiRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         kanjiRecyclerView.setAdapter(kanjiAdapter);
-        kanjiRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
 
         kanjiAdapter.setContext(getContext());
         kanjiAdapter.setListItems(listItems);
