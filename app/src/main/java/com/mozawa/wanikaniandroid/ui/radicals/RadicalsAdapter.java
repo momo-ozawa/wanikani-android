@@ -43,7 +43,7 @@ public class RadicalsAdapter extends RecyclerView.Adapter<RadicalsAdapter.Radica
     }
 
     public boolean isHeader(int position) {
-        return getItemViewType(position) == 0;
+        return getItemViewType(position) == HEADER_VIEW_TYPE;
     }
 
     @Override
