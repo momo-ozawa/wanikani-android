@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.mozawa.wanikaniandroid.R;
 import com.mozawa.wanikaniandroid.data.model.Kanji;
+import com.mozawa.wanikaniandroid.data.model.ListItem;
 import com.mozawa.wanikaniandroid.ui.base.BaseActivity;
 import com.mozawa.wanikaniandroid.ui.base.BaseFragment;
 import com.mozawa.wanikaniandroid.ui.kanjidetail.KanjiDetailActivity;
@@ -96,7 +97,7 @@ public class KanjiFragment extends BaseFragment implements KanjiMvpView,
     }
 
     @Override
-    public void showKanji(List<Kanji> kanjiList) {
+    public void showListItems(List<ListItem> listItems) {
         if (kanjiMessageTextView.getVisibility() == View.VISIBLE) {
             kanjiMessageTextView.setVisibility(View.GONE);
         }
@@ -107,10 +108,28 @@ public class KanjiFragment extends BaseFragment implements KanjiMvpView,
         kanjiRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
 
         kanjiAdapter.setContext(getContext());
-        kanjiAdapter.setKanjiList(kanjiList);
+//        kanjiAdapter.setKanjiList(kanjiList);
+        kanjiAdapter.setListItems(listItems);
         kanjiAdapter.setKanjiClickedListener(this);
         kanjiAdapter.notifyDataSetChanged();
     }
+
+//    @Override
+//    public void showKanji(List<Kanji> kanjiList) {
+//        if (kanjiMessageTextView.getVisibility() == View.VISIBLE) {
+//            kanjiMessageTextView.setVisibility(View.GONE);
+//        }
+//        kanjiRecyclerView.setVisibility(View.VISIBLE);
+//
+//        kanjiRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        kanjiRecyclerView.setAdapter(kanjiAdapter);
+//        kanjiRecyclerView.addItemDecoration(new DividerItemDecoration(getContext()));
+//
+//        kanjiAdapter.setContext(getContext());
+//        kanjiAdapter.setKanjiList(kanjiList);
+//        kanjiAdapter.setKanjiClickedListener(this);
+//        kanjiAdapter.notifyDataSetChanged();
+//    }
 
     @Override
     public void showKanjiEmpty() {

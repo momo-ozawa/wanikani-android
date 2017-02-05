@@ -2,7 +2,9 @@ package com.mozawa.wanikaniandroid.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Kanji {
+public class Kanji implements ListItem {
+
+    public static final String TYPE = "kanji";
 
     public String character;
     public String meaning;
@@ -27,4 +29,8 @@ public class Kanji {
         this.onyomi = onyomi;
     }
 
+    @Override
+    public String  getType() {
+        return TYPE;
+    }
 }

@@ -10,32 +10,34 @@ import android.widget.TextView;
 
 import com.mozawa.wanikaniandroid.R;
 import com.mozawa.wanikaniandroid.data.model.Kanji;
+import com.mozawa.wanikaniandroid.data.model.ListHeader;
+import com.mozawa.wanikaniandroid.data.model.ListItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHolder> {
 
+    public static final int HEADER_VIEW_TYPE = 0;
+    public static final int KANJI_VIEW_TYPE = 1;
+
     private Context context;
-    private List<Kanji> kanjiList;
+    private List<ListItem> listItems;
     private KanjiClickedListener kanjiClickedListener;
 
     @Inject
     public KanjiAdapter() {
-        kanjiList = new ArrayList<>();
+        listItems = new ArrayList<>();
     }
 
     public void setContext(Context context) {
         this.context = context;
     }
 
-    public void setKanjiList(List<Kanji> kanjiList) {
-        this.kanjiList = kanjiList;
+    public void setListItems(List<ListItem> listItems) {
+        this.listItems = listItems;
     }
 
     public void setKanjiClickedListener(KanjiClickedListener kanjiClickedListener) {
@@ -45,46 +47,84 @@ public class KanjiAdapter extends RecyclerView.Adapter<KanjiAdapter.KanjiViewHol
     @Override
     public KanjiViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
-        View itemView = layoutInflater.inflate(R.layout.item_kanji, parent, false);
-        return new KanjiViewHolder(itemView);
+        View itemView;
+
+        if (viewType == HEADER_VIEW_TYPE) {
+            itemView = layoutInflater.inflate(R.layout.item_kanji_header, parent, false);
+            return new KanjiViewHolder(itemView, viewType);
+        } else if (viewType == KANJI_VIEW_TYPE) {
+            itemView = layoutInflater.inflate(R.layout.item_kanji, parent, false);
+            return new KanjiViewHolder(itemView, viewType);
+        }
+
+        return null;
     }
 
     @Override
     public void onBindViewHolder(KanjiViewHolder holder, int position) {
-        final Kanji kanji = kanjiList.get(position);
+        ListItem item = listItems.get(position);
 
-        holder.characterTextView.setText(kanji.character);
-        holder.onyomiTextView.setText(kanji.onyomi);
-        holder.meaningTextView.setText(kanji.meaning);
+        switch (item.getType()) {
+            case ListHeader.TYPE:
+                final ListHeader header = (ListHeader) item;
+                holder.levelTextView.setText(header.title);
+                break;
+            case Kanji.TYPE:
+                final Kanji kanji = (Kanji) item;
+                holder.characterTextView.setText(kanji.character);
+                holder.onyomiTextView.setText(kanji.onyomi);
+                holder.meaningTextView.setText(kanji.meaning);
 
-        // On click
-        holder.kanjiView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                kanjiClickedListener.onKanjiClicked(kanji);
-            }
-        });
+                // On click
+                holder.kanjiView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        kanjiClickedListener.onKanjiClicked(kanji);
+                    }
+                });
+
+                break;
+        }
     }
 
     @Override
     public int getItemCount() {
-        return kanjiList.size();
+        return listItems.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        ListItem listItem = listItems.get(position);
+        switch (listItem.getType()) {
+            case ListHeader.TYPE:
+                return 0;
+            case Kanji.TYPE:
+                return 1;
+        }
+        return -1;
     }
 
     public class KanjiViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.kanjiView)
+        // Header
+        TextView levelTextView;
+
+        // Kanji
         View kanjiView;
-        @BindView(R.id.characterTextView)
         TextView characterTextView;
-        @BindView(R.id.onyomiTextView)
         TextView onyomiTextView;
-        @BindView(R.id.meaningTextView)
         TextView meaningTextView;
 
-        public KanjiViewHolder(View itemView) {
+        public KanjiViewHolder(View itemView, int itemViewType) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            if (itemViewType == HEADER_VIEW_TYPE) {
+                levelTextView = (TextView) itemView.findViewById(R.id.levelTextView);
+            } else {
+                kanjiView = itemView.findViewById(R.id.kanjiView);
+                characterTextView = (TextView) itemView.findViewById(R.id.characterTextView);
+                onyomiTextView = (TextView) itemView.findViewById(R.id.onyomiTextView);
+                meaningTextView = (TextView) itemView.findViewById(R.id.meaningTextView);
+            }
         }
     }
 
