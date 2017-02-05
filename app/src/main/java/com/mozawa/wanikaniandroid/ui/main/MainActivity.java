@@ -18,6 +18,9 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity {
 
+    public static final String KEY_CURRENT_TAB = "main_activity.KEY_CURRENT_TAB";
+    public static final String KEY_CURRENT_TAB_INDEX = "main_activity.KEY_CURRENT_TAB_INDEX";
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.tabLayout)
@@ -25,7 +28,9 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.viewPager)
     ViewPager viewPager;
 
-    ViewPagerAdapter adapter;
+    private ViewPagerAdapter adapter;
+    private int currentTabIndex;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
